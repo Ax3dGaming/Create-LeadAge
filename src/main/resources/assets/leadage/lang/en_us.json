@@ -20,6 +20,8 @@
   "block.leadage.polished_lead_glass": "Polished Lead Glass",
   "block.leadage.tiled_lead_glass": "Tiled Lead Glass",
 
+  "effect.leadage.masking": "Masking",
+
   "tooltip.leadage.hint": "§8Hold [§fShift§8] for Summary",
   "tooltip.leadage.diving_weight.summary": "§2Allows you to turn §aheavier§2 depending on how many Diving Weights you hold.\n\n§2The more you hold, the heavier you'll get, up to §a%1$s Diving Weights§2.\n\n§2Use it to sink faster, reduce your jumps or gain better control of your movements while using Diving Leggings.",
   "tooltip.leadage.diving_weight.when_held": "§7When Held",
