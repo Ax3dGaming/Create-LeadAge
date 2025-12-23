@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "leadage:block/lead_brick_slab"
+    },
+    "type=top": {
+      "model": "leadage:block/lead_brick_slab_top"
+    },
+    "type=double": {
+      "model": "leadage:block/lead_brick_slab_full"
+    }
+  }
+}

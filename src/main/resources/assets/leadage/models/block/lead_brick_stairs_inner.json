@@ -1,0 +1,9 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "leadage:block/lead_bricks",
+    "bottom": "leadage:block/lead_bricks",
+    "top": "leadage:block/lead_bricks",
+    "side": "leadage:block/lead_bricks"
+  }
+}

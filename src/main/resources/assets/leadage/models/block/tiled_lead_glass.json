@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "leadage:block/tiled_lead_glass",
+    "particle": "leadage:block/tiled_lead_glass"
+  }
+}

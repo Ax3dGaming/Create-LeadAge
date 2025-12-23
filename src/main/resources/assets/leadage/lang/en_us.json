@@ -3,10 +3,27 @@
   "item.leadage.raw_galena": "Raw Galena",
   "item.leadage.crushed_galena": "Crushed Galena",
   "item.leadage.lead_ingot": "Lead Ingot",
-  "item.leadage.lead_sheet": "Lead Sheetee",
+  "item.leadage.lead_sheet": "Lead Sheet",
+  "item.leadage.lead_nugget": "Lead Nugget",
+  "item.leadage.lead_salt": "Lead Salt",
+  "item.leadage.ceruse": "Ceruse",
+  "item.leadage.diving_weight": "Diving Weight",
 
-  "tooltip.leadage.diving_weight.hint": "§8Hold [§fShift§8] for Summary",
+  "block.leadage.lead_glance": "Lead Glance",
+  "block.leadage.lead_block": "Block Of Lead",
+  "block.leadage.lead_bricks": "Lead Bricks",
+  "block.leadage.lead_brick_stairs": "Lead Brick Stairs",
+  "block.leadage.lead_brick_slab": "Lead Brick Slab",
+  "block.leadage.lead_tiles": "Lead Tiles",
+  "block.leadage.lead_plates": "Lead Plates",
+  "block.leadage.lead_glass": "Lead Glass",
+  "block.leadage.polished_lead_glass": "Polished Lead Glass",
+  "block.leadage.tiled_lead_glass": "Tiled Lead Glass",
+
+  "tooltip.leadage.hint": "§8Hold [§fShift§8] for Summary",
   "tooltip.leadage.diving_weight.summary": "§2Allows you to turn §aheavier§2 depending on how many Diving Weights you hold.\n\n§2The more you hold, the heavier you'll get, up to §a%1$s Diving Weights§2.\n\n§2Use it to sink faster, reduce your jumps or gain better control of your movements while using Diving Leggings.",
   "tooltip.leadage.diving_weight.when_held": "§7When Held",
-  "tooltip.leadage.diving_weight.effect": "§2Makes you §aheavier§2."
+  "tooltip.leadage.diving_weight.effect": "§2Makes you §aheavier§2.",
+  "tooltip.leadage.when_used": "§7When Used",
+  "tooltip.leadage.salt.summary": "§2Turns §aGrass into Dirt§2,\nand §aFarmland into Coarse Dirt\n§2in a §a%1$s §2blocks radius."
 }

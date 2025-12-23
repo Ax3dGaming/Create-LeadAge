@@ -16,8 +16,9 @@ public class HeavyPlayerHandler {
 
     @SubscribeEvent
     public static void onJump(LivingEvent.LivingJumpEvent event) {
+        boolean doesIgnoreCreative = Config.DIVING_WEIGHT_IGNORE_CREATIVE.get();
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.isCreative() || player.isSpectator()) return;
+        if ((doesIgnoreCreative && player.isCreative()) || player.isSpectator()) return;
 
         int maxWeight = Config.MAX_DIVING_WEIGHT.get();
         double minJump = Config.MIN_JUMP_VELOCITY.get();
@@ -39,9 +40,10 @@ public class HeavyPlayerHandler {
 
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
+        boolean doesIgnoreCreative = Config.DIVING_WEIGHT_IGNORE_CREATIVE.get();
         if (!(event.getEntity() instanceof Player player)) return;
         if (!player.isInWater()) return;
-        if (player.isCreative() || player.isSpectator()) return;
+        if ((doesIgnoreCreative && player.isCreative())) return;
 
         int maxWeight = Config.MAX_DIVING_WEIGHT.get();
         int weight = countWeights(player, maxWeight);
@@ -55,7 +57,6 @@ public class HeavyPlayerHandler {
         );
     }
 
-    // ⚖️ COMPTE LES POIDS
     private static int countWeights(Player player, int maxWeight) {
         int count = 0;
 

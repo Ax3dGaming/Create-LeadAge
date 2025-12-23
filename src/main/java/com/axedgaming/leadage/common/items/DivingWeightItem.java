@@ -21,7 +21,7 @@ public class DivingWeightItem extends Item {
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
 
         if (!Screen.hasShiftDown()) {
-            tooltip.add(Component.translatable("tooltip.leadage.diving_weight.hint"));
+            tooltip.add(Component.translatable("tooltip.leadage.hint"));
             return;
         }
 

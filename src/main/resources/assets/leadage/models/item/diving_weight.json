@@ -1,0 +1,7 @@
+{
+  "parent": "leadage:custom/diving_weight",
+  "textures": {
+    "0": "leadage:block/diving_weight",
+    "particle": "leadage:item/diving_weight"
+  }
+}

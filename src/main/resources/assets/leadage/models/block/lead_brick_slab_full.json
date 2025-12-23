@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "leadage:block/lead_bricks",
+    "bottom": "leadage:block/lead_bricks",
+    "top": "leadage:block/lead_bricks",
+    "side": "leadage:block/lead_bricks"
+  }
+}

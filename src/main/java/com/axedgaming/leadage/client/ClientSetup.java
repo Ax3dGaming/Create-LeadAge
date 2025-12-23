@@ -2,11 +2,15 @@ package com.axedgaming.leadage.client;
 
 import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.client.render.layer.MaskingLayer;
+import com.axedgaming.leadage.common.ModBlocks;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(
         modid = LeadAge.MOD_ID,
@@ -25,5 +29,30 @@ public class ClientSetup {
         }
 
         System.out.println("MaskingLayer REGISTERED");
+    }
+
+    @SubscribeEvent
+    @SuppressWarnings("removal")
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.LEAD_GLASS.get(),
+                    RenderType.translucent()
+            );
+        });
+
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.POLISHED_LEAD_GLASS.get(),
+                    RenderType.translucent()
+            );
+        });
+
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.TILED_LEAD_GLASS.get(),
+                    RenderType.translucent()
+            );
+        });
     }
 }

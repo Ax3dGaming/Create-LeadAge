@@ -12,7 +12,11 @@ public class Config {
 
     public static ForgeConfigSpec.DoubleValue MIN_JUMP_VELOCITY;
 
+    public static ForgeConfigSpec.BooleanValue DIVING_WEIGHT_IGNORE_CREATIVE;
+
     public static ForgeConfigSpec.IntValue CERUSE_DURATION;
+
+    public static ForgeConfigSpec.IntValue SALT_RADIUS;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -27,6 +31,10 @@ public class Config {
                 .comment("Minimum jump Y velocity when fully weighted (0.42 = normal jump)")
                 .defineInRange("minJumpVelocity", 0.18D, 0.0D, 1.0D);
 
+        DIVING_WEIGHT_IGNORE_CREATIVE = builder
+                .comment("Does the diving weight ignore creative mode")
+                .define("divingWeightIgnoreCreative", true);
+
         builder.pop();
 
         builder.push("ceruse");
@@ -34,6 +42,14 @@ public class Config {
         CERUSE_DURATION = builder
                 .comment("Duration of the effect given by the ceruse item (in s)")
                 .defineInRange("ceruseDuration", 60, 1, 240);
+
+        builder.pop();
+
+        builder.push("salt");
+
+        SALT_RADIUS = builder
+                .comment("The radius where the salt transforms blocks")
+                .defineInRange("saltRadius", 6, 1, 12);
 
         builder.pop();
 
