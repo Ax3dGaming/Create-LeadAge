@@ -35,6 +35,7 @@ public class LeadAge {
         ModEffects.MOD_EFFECT.register(modBus);
         ModRecipes.SERIALIZERS.register(modBus);
         ModRecipes.TYPES.register(modBus);
+        ModGameRules.register();
 
         NetworkHandler.register();
 

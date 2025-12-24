@@ -28,6 +28,12 @@ public class NetworkHandler {
                 MaskingSyncPacket::decode,
                 MaskingSyncPacket::handle
         );
+
+        CHANNEL.messageBuilder(SaturnismSyncPacket.class, index++)
+                .encoder(SaturnismSyncPacket::encode)
+                .decoder(SaturnismSyncPacket::decode)
+                .consumerMainThread(SaturnismSyncPacket::handle)
+                .add();
     }
 
     public static void sendToTracking(Player player, Object msg) {
@@ -36,5 +42,9 @@ public class NetworkHandler {
 
     public static void sendToPlayer(Player player, Object msg) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), msg);
+    }
+
+    public static void sendTo(ServerPlayer player, Object msg) {
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), msg);
     }
 }

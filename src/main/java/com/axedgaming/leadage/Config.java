@@ -20,9 +20,23 @@ public class Config {
 
     public static ForgeConfigSpec.IntValue CERUSE_AGGRO_RANGE;
 
+    public static ForgeConfigSpec.BooleanValue CERUSE_PARTICLES;
+
     public static ForgeConfigSpec.IntValue SALT_RADIUS;
 
     public static ForgeConfigSpec.IntValue SALT_PERCENTAGE;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_PASSIVE;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_CRAFT;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_SLEEP;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_SLEEP_WITH_LEAD;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_FOOD;
+
+    public static ForgeConfigSpec.IntValue SATURNISM_EFFECT_THRESHOLD;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -57,6 +71,10 @@ public class Config {
                 .comment("The range where the mobs aggro you when ceruse is applied (in blocks)")
                 .defineInRange("ceruseAggroRange", 8, 1, 20);
 
+        CERUSE_PARTICLES = builder
+                .comment("Enables or not the particles effect for the player")
+                .define("doesEmitParticles", true);
+
         builder.pop();
 
         builder.push("salt");
@@ -70,6 +88,32 @@ public class Config {
                 .defineInRange("saltPercentage", 50, 10, 100);
 
         builder.pop();
+
+        builder.push("saturnism");
+
+        SATURNISM_CRAFT = builder
+                .comment("The gain in lead value when you craft or cook something relative to lead")
+                .defineInRange("saturnismCraft", 2, 1, 10);
+
+        SATURNISM_PASSIVE = builder
+                .comment("The gain in passive lead value when you have something relative to lead on you")
+                .defineInRange("saturnismPassive", 5, 1, 20);
+
+        SATURNISM_FOOD = builder
+                .comment("The gain of lead value when you eat lead poisoned food")
+                .defineInRange("saturnismFood", 250, 100, 1000);
+
+        SATURNISM_SLEEP = builder
+                .comment("The loss of lead value when you sleep")
+                .defineInRange("saturnismSleep", 50, 10, 100);
+
+        SATURNISM_SLEEP_WITH_LEAD = builder
+                .comment("The loss of lead value when you sleep with lead items on you")
+                .defineInRange("saturnismSleepWithLead", 20, 5, 60);
+
+        SATURNISM_EFFECT_THRESHOLD = builder
+                .comment("The lead value you need to have to get the Saturnism effect")
+                .defineInRange("saturnismEffectThreshold", 450, 200, 2000);
 
         COMMON_SPEC = builder.build();
     }
