@@ -22,8 +22,9 @@
 
   "effect.leadage.masking": "Masking",
 
-  "tooltip.leadage.hint": "§8Hold [§fShift§8] for Summary",
-  "tooltip.leadage.diving_weight.summary": "§2Allows you to turn §aheavier§2 depending on how many Diving Weights you hold.\n\n§2The more you hold, the heavier you'll get, up to §a%1$s Diving Weights§2.\n\n§2Use it to sink faster, reduce your jumps or gain better control of your movements while using Diving Leggings.",
+  "tooltip.leadage.hint": "§8Hold [§7Shift§8] for Summary",
+  "tooltip.leadage.hint_pressed": "§8Hold [§fShift§8] for Summary",
+  "tooltip.leadage.diving_weight.summary": "§2Allows you to turn §aheavier§2\ndepending on how many Diving Weights you hold.\n\n§2The more you hold, the heavier you'll get\nup to§a %1$s §aDiving Weights§2.\n\n§2Use it to sink faster, reduce your jumps\nor gain better control of your movements\nwhile using Diving Leggings.",
   "tooltip.leadage.diving_weight.when_held": "§7When Held",
   "tooltip.leadage.diving_weight.effect": "§2Makes you §aheavier§2.",
   "tooltip.leadage.when_used": "§7When Used",

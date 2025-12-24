@@ -27,6 +27,8 @@ public class DivingWeightItem extends Item {
 
         int maxWeight = Config.MAX_DIVING_WEIGHT.get();
 
+        tooltip.add(Component.translatable("tooltip.leadage.hint_pressed"));
+
         tooltip.add(Component.empty());
 
         tooltip.add(

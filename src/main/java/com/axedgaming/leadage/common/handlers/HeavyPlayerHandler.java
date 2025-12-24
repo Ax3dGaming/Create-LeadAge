@@ -52,7 +52,7 @@ public class HeavyPlayerHandler {
         Vec3 motion = player.getDeltaMovement();
         player.setDeltaMovement(
                 motion.x,
-                motion.y - (0.03 * weight / maxWeight),
+                motion.y - (0.06 * weight / maxWeight),
                 motion.z
         );
     }

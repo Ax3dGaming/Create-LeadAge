@@ -1,10 +1,7 @@
 package com.axedgaming.leadage;
 
 import com.axedgaming.leadage.client.render.layer.MaskingLayer;
-import com.axedgaming.leadage.common.ModBlocks;
-import com.axedgaming.leadage.common.ModCreativeTab;
-import com.axedgaming.leadage.common.ModEffects;
-import com.axedgaming.leadage.common.ModItems;
+import com.axedgaming.leadage.common.*;
 import com.axedgaming.leadage.common.network.NetworkHandler;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -36,6 +33,8 @@ public class LeadAge {
         ModCreativeTab.CREATIVE_MODE_TAB.register(modBus);
         ModBlocks.BLOCKS.register(modBus);
         ModEffects.MOD_EFFECT.register(modBus);
+        ModRecipes.SERIALIZERS.register(modBus);
+        ModRecipes.TYPES.register(modBus);
 
         NetworkHandler.register();
 

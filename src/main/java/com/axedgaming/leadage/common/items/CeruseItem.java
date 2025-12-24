@@ -22,12 +22,25 @@ public class CeruseItem extends Item {
         return Config.CERUSE_DURATION.get() * 20;
     }
 
+    private int getCooldownTicks() {
+        return Config.CERUSE_COOLDOWN.get() * 20;
+    }
+
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(
+            Level level,
+            Player player,
+            InteractionHand hand
+    ) {
         ItemStack stack = player.getItemInHand(hand);
+
+        if (player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.fail(stack);
+        }
 
         if (!level.isClientSide) {
             applyEffect(player);
+            applyCooldown(player);
             stack.shrink(1);
         }
 
@@ -45,8 +58,13 @@ public class CeruseItem extends Item {
             return InteractionResult.PASS;
         }
 
+        if (player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResult.FAIL;
+        }
+
         if (!player.level().isClientSide) {
             applyEffect(targetPlayer);
+            applyCooldown(player);
             stack.shrink(1);
         }
 
@@ -59,8 +77,12 @@ public class CeruseItem extends Item {
                 getDurationTicks(),
                 0,
                 false,
-                false,
+                true,
                 true
         ));
+    }
+
+    private void applyCooldown(Player player) {
+        player.getCooldowns().addCooldown(this, getCooldownTicks());
     }
 }
