@@ -4,8 +4,8 @@ import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.items.CeruseItem;
 import com.axedgaming.leadage.common.items.DivingWeightItem;
 import com.axedgaming.leadage.common.items.SaltItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
+import com.axedgaming.leadage.common.materials.LeadTier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.EventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -68,6 +68,46 @@ public class ModItems {
 
     public static final RegistryObject<Item> DIVING_WEIGHT = ITEMS.register("diving_weight",
             () -> new DivingWeightItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> LEAD_PICKAXE = ITEMS.register("lead_pickaxe",
+            () -> new PickaxeItem(
+                    LeadTier.LEAD,
+                    1,
+                    -2.8f,
+                    new Item.Properties().stacksTo(1)
+            ));
+
+    public static final RegistryObject<Item> LEAD_AXE = ITEMS.register("lead_axe",
+            () -> new AxeItem(
+                    LeadTier.LEAD,
+                    5.0f,
+                    -3.1f,
+                    new Item.Properties().stacksTo(1)
+            ));
+
+    public static final RegistryObject<Item> LEAD_HOE = ITEMS.register("lead_hoe",
+            () -> new HoeItem(
+                    LeadTier.LEAD,
+                    -2,
+                    -1.0f,
+                    new Item.Properties().stacksTo(1)
+            ));
+
+    public static final RegistryObject<Item> LEAD_SHOVEL = ITEMS.register("lead_shovel",
+            () -> new ShovelItem(
+                    LeadTier.LEAD,
+                    1.5f,
+                    -3.0f,
+                    new Item.Properties().stacksTo(1)
+            ));
+
+    public static final RegistryObject<Item> LEAD_SWORD = ITEMS.register("lead_sword",
+            () -> new SwordItem(
+                    LeadTier.LEAD,
+                    3,
+                    -2.4f,
+                    new Item.Properties().stacksTo(1)
+            ));
 
     public static void registerItems(EventBus eventBus) {
         ITEMS.register(eventBus);

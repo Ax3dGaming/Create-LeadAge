@@ -34,6 +34,11 @@ public class ModCreativeTab {
                         output.accept(ModItems.LEAD_GLASS.get());
                         output.accept(ModItems.POLISHED_LEAD_GLASS.get());
                         output.accept(ModItems.TILED_LEAD_GLASS.get());
+                        output.accept(ModItems.LEAD_PICKAXE.get());
+                        output.accept(ModItems.LEAD_AXE.get());
+                        output.accept(ModItems.LEAD_SHOVEL.get());
+                        output.accept(ModItems.LEAD_SWORD.get());
+                        output.accept(ModItems.LEAD_HOE.get());
                     }).build());
 
     public static void register(EventBus eventBus) {
