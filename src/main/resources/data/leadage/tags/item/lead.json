@@ -1,4 +1,21 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "leadage:raw_galena",
+    "leadage:crushed_galena",
+    "leadage:lead_ingot",
+    "leadage:lead_nugget",
+    "leadage:lead_sheet",
+    "leadage:lead_salt",
+    "leadage:lead_glance",
+    "leadage:lead_block",
+    "leadage:lead_bricks",
+    "leadage:lead_brick_stairs",
+    "leadage:lead_brick_slab",
+    "leadage:lead_tiles",
+    "leadage:lead_plates",
+    "leadage:lead_glass",
+    "leadage:polished_lead_glass",
+    "leadage:tiled_lead_glass"
+  ]
 }

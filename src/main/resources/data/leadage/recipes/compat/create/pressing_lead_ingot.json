@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "leadage:lead_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:lead_sheet",
+      "count": 1
+    }
+  ]
+}

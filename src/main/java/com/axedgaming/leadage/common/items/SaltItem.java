@@ -1,6 +1,7 @@
 package com.axedgaming.leadage.common.items;
 
 import com.axedgaming.leadage.Config;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -42,7 +43,7 @@ public class SaltItem extends Item {
         tooltip.add(
                 Component.translatable(
                         "tooltip.leadage.salt.summary",
-                        radius
+                        Component.literal(String.valueOf(radius)).withStyle(ChatFormatting.GREEN)
                 )
         );
     }

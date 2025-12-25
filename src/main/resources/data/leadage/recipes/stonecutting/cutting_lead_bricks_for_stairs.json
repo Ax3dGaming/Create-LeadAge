@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "leadage:lead_bricks"
+  },
+  "result": "leadage:lead_brick_stairs",
+  "count": 1
+}

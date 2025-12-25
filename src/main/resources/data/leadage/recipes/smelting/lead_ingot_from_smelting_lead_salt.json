@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "leadage:lead_salt"
+  },
+  "result": "leadage:lead_ingot",
+  "experience": 0,
+  "cookingtime": 200
+}

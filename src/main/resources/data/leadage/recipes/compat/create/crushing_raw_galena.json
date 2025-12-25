@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "processingTime": 150,
+  "ingredients": [
+    {
+      "item": "leadage:raw_galena"
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:crushed_galena",
+      "count": 1
+    }
+  ]
+}

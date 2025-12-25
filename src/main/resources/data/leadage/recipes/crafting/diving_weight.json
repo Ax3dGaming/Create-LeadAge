@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NNN",
+    "NNN"
+  ],
+  "key": {
+    "N": {
+      "item": "leadage:lead_nugget"
+    }
+  },
+  "result": {
+    "item": "leadage:diving_weight",
+    "count": 2
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "leadage:lead_block"
+    }
+  ],
+  "result": {
+    "item": "leadage:lead_ingot",
+    "count": 9
+  }
+}

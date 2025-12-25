@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "leadage:lead_glass"
+  },
+  "result": "leadage:tiled_lead_glass",
+  "count": 1
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "item": "leadage:lead_glass"
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:polished_lead_glass",
+      "count": 1
+    }
+  ]
+}

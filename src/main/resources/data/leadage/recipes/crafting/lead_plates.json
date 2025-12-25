@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "leadage:lead_sheet"
+    }
+  },
+  "result": {
+    "item": "leadage:lead_plates",
+    "count": 1
+  }
+}

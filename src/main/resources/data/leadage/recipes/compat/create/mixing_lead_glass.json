@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "leadage:raw_galena",
+      "count": 1
+    },
+    {
+      "tag": "forge:sand",
+      "count": 3
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:lead_glass",
+      "count": 3
+    }
+  ]
+}

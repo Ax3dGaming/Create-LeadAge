@@ -2,6 +2,7 @@ package com.axedgaming.leadage.common.items;
 
 import com.axedgaming.leadage.Config;
 import com.axedgaming.leadage.common.ModEffects;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.chat.Component;
@@ -54,8 +55,8 @@ public class CeruseItem extends Item {
         tooltip.add(
                 Component.translatable(
                         "tooltip.leadage.ceruse.used",
-                        range,
-                        duration
+                        Component.literal(String.valueOf(range)).withStyle(ChatFormatting.GREEN),
+                        Component.literal(String.valueOf(duration)).withStyle(ChatFormatting.GREEN)
                 )
         );
     }

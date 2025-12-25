@@ -1,0 +1,30 @@
+{
+  "type": "create:crushing",
+  "processingTime": 150,
+  "ingredients": [
+    {
+      "item": "leadage:lead_glance"
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:crushed_galena",
+      "count": 2
+    },
+    {
+      "item": "leadage:crushed_galena",
+      "chance": 0.5,
+      "count": 1
+    },
+    {
+      "item": "create:zinc_nugget",
+      "chance": 0.3,
+      "count": 1
+    },
+    {
+      "item": "create:experience_nugget",
+      "chance": 0.75,
+      "count": 1
+    }
+  ]
+}

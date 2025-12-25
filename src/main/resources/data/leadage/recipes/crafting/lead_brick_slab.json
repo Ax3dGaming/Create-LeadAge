@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "leadage:lead_bricks"
+    }
+  },
+  "result": {
+    "item": "leadage:lead_brick_slab",
+    "count": 6
+  }
+}
