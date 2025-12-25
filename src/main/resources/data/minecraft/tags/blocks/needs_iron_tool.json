@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "leadage:lead_glance",
+    "leadage:lead_block",
+    "leadage:lead_bricks",
+    "leadage:lead_brick_stairs",
+    "leadage:lead_brick_slab",
+    "leadage:lead_tiles",
+    "leadage:lead_plates"
+  ]
+}

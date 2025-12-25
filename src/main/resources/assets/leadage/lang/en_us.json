@@ -30,7 +30,7 @@
   "tooltip.leadage.when_used": "§7When Used",
   "tooltip.leadage.salt.summary": "§2Turns §aGrass into Dirt\n§2and §aFarmland into Coarse Dirt§2\nin a §a%1$s §2blocks radius.\n§2When combined with §aany type of food,\n§2make them §apoisoned with lead",
   "tooltip.leadage.ceruse.summary": "§2Usable on you or on someone",
-  "tooltip.leadage.ceruse.used": "§aMakes your skin white§2, §ahide your nametag§2,\nand §areduce the distance where mobs\nfollow you to %1$s §ablocks.\n§2For §a%2$ss",
+  "tooltip.leadage.ceruse.used": "§aMakes your skin white§2, §ahide your nametag§2,\nand §areduce the distance where mobs\nfollow you to %1$s §ablocks.\n§2For §a%2$s§as",
 
   "message.leadage.saturnism.none": "§aSaturnism: §20",
   "message.leadage.saturnism.low": "§aSaturnism: §e%1$s",

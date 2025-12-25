@@ -12,34 +12,72 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LeadAge.MOD_ID);
 
     public static final RegistryObject<Block> LEAD_GLANCE = BLOCKS.register("lead_glance",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_ORE)
+                    .strength(3.0F, 3.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_BLOCK = BLOCKS.register("lead_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_BLOCK)
+                    .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_BRICKS = BLOCKS.register("lead_bricks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
+            () -> new Block(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_BLOCK)
+                    .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_BRICK_STAIRS = BLOCKS.register("lead_brick_stairs",
-            () -> new StairBlock(() -> LEAD_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(ModBlocks.LEAD_BRICKS.get())));
+            () -> new StairBlock(
+                    () -> LEAD_BRICKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties
+                            .copy(Blocks.IRON_BLOCK)
+                            .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_BRICK_SLAB = BLOCKS.register("lead_brick_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BRICKS.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_BLOCK)
+                    .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_TILES = BLOCKS.register("lead_tiles",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_BLOCK)
+                    .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_PLATES = BLOCKS.register("lead_plates",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties
+                    .copy(Blocks.IRON_BLOCK)
+                    .strength(5.0F, 6.0F)
+            ));
 
     public static final RegistryObject<Block> LEAD_GLASS = BLOCKS.register("lead_glass",
-            () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion().lightLevel(blockState -> 3)));
+            () -> new GlassBlock(BlockBehaviour.Properties
+                    .copy(Blocks.GLASS)
+                    .strength(0.3F, 0.3F)
+                    .noOcclusion()
+                    .lightLevel(state -> 3)
+            ));
 
     public static final RegistryObject<Block> POLISHED_LEAD_GLASS = BLOCKS.register("polished_lead_glass",
-            () ->  new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion().lightLevel(blockState -> 3)));
+            () -> new GlassBlock(BlockBehaviour.Properties
+                    .copy(Blocks.GLASS)
+                    .strength(0.3F, 0.3F)
+                    .noOcclusion()
+                    .lightLevel(state -> 3)
+            ));
 
     public static final RegistryObject<Block> TILED_LEAD_GLASS = BLOCKS.register("tiled_lead_glass",
-            () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion().lightLevel(blockState -> 3)));
+            () -> new GlassBlock(BlockBehaviour.Properties
+                    .copy(Blocks.GLASS)
+                    .strength(0.3F, 0.3F)
+                    .noOcclusion()
+                    .lightLevel(state -> 3)
+            ));
 
     public static void register(EventBus eventBus){
         BLOCKS.register(eventBus);

@@ -47,15 +47,20 @@ public class SaturnismHandler {
 
     private static void refreshEffect(ServerPlayer player, int value) {
         int threshold = Config.SATURNISM_EFFECT_THRESHOLD.get();
+
         if (value >= threshold) {
-            player.addEffect(new MobEffectInstance(
-                    ModEffects.SATURNISM.get(),
-                    60,
-                    0,
-                    true,
-                    false,
-                    true
-            ));
+            MobEffectInstance current = player.getEffect(ModEffects.SATURNISM.get());
+
+            if (current == null || current.getDuration() < 200) {
+                player.addEffect(new MobEffectInstance(
+                        ModEffects.SATURNISM.get(),
+                        1000000,
+                        0,
+                        true,
+                        false,
+                        true
+                ));
+            }
         } else {
             player.removeEffect(ModEffects.SATURNISM.get());
         }
