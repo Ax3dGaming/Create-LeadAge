@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "leadage:block/lead_soldier_head"
+    },
+    "facing=east": {
+      "model": "leadage:block/lead_soldier_head",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "leadage:block/lead_soldier_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "leadage:block/lead_soldier_head",
+      "y": 270
+    }
+  }
+}

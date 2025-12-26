@@ -1,8 +1,10 @@
 package com.axedgaming.leadage.client;
 
 import com.axedgaming.leadage.LeadAge;
+import com.axedgaming.leadage.client.render.LeadSoldierRenderer;
 import com.axedgaming.leadage.client.render.layer.MaskingLayer;
 import com.axedgaming.leadage.common.ModBlocks;
+import com.axedgaming.leadage.common.ModEntities;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -54,5 +56,17 @@ public class ClientSetup {
                     RenderType.translucent()
             );
         });
+
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.LEAD_SOLDIER_HEAD.get(),
+                    RenderType.cutout()
+            );
+        });
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.LEAD_SOLDIER.get(), LeadSoldierRenderer::new);
     }
 }

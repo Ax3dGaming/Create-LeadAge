@@ -1,6 +1,7 @@
 package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.LeadAge;
+import com.axedgaming.leadage.common.blocks.LeadSoldierHeadBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.EventBus;
@@ -78,6 +79,9 @@ public class ModBlocks {
                     .noOcclusion()
                     .lightLevel(state -> 3)
             ));
+
+    public static final RegistryObject<Block> LEAD_SOLDIER_HEAD = BLOCKS.register("lead_soldier_head",
+            () -> new LeadSoldierHeadBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BLOCK.get())));
 
     public static void register(EventBus eventBus){
         BLOCKS.register(eventBus);

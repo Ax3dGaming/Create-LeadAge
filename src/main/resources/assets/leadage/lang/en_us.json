@@ -8,6 +8,7 @@
   "item.leadage.lead_salt": "Lead Salt",
   "item.leadage.ceruse": "Ceruse",
   "item.leadage.diving_weight": "Diving Weight",
+  "item.leadage.lead_soldier_spawn_egg": "Lead Soldier Spawn Egg",
 
   "item.leadage.lead_sword": "Lead Sword",
   "item.leadage.lead_pickaxe": "Lead Pickaxe",
@@ -25,6 +26,9 @@
   "block.leadage.lead_glass": "Lead Glass",
   "block.leadage.polished_lead_glass": "Polished Lead Glass",
   "block.leadage.tiled_lead_glass": "Tiled Lead Glass",
+  "block.leadage.lead_soldier_head": "Lead Soldier Head",
+
+  "entity.leadage.lead_soldier": "Lead Soldier",
 
   "effect.leadage.masking": "Masking",
 

@@ -7,6 +7,7 @@ import com.axedgaming.leadage.common.items.SaltItem;
 import com.axedgaming.leadage.common.materials.LeadTier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.EventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -108,6 +109,19 @@ public class ModItems {
                     -2.4f,
                     new Item.Properties().stacksTo(1)
             ));
+
+    public static final RegistryObject<Item> LEAD_SOLDIER_SPAWN_EGG =
+            ITEMS.register("lead_soldier_spawn_egg",
+                    () -> new ForgeSpawnEggItem(
+                            ModEntities.LEAD_SOLDIER,
+                            0xB7B7B7,
+                            0x2B2B2B,
+                            new Item.Properties()
+                    )
+            );
+
+    public static final RegistryObject<Item> LEAD_SOLDER_HEAD = ITEMS.register("lead_soldier_head",
+            () -> new BlockItem(ModBlocks.LEAD_SOLDIER_HEAD.get(), new Item.Properties()));
 
     public static void registerItems(EventBus eventBus) {
         ITEMS.register(eventBus);

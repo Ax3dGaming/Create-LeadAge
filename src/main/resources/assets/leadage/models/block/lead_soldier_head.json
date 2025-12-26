@@ -1,0 +1,8 @@
+{
+  "parent": "leadage:custom/golem_head",
+  "textures": {
+    "all": "leadage:block/golem_head",
+    "particle": "leadage:block/lead_block",
+    "0": "leadage:block/golem_head"
+  }
+}

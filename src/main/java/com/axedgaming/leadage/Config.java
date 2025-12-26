@@ -151,7 +151,6 @@ public class Config {
 
         builder.pop();
 
-
         COMMON_SPEC = builder.build();
     }
 }
