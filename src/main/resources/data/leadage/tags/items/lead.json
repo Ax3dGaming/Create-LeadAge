@@ -16,6 +16,11 @@
     "leadage:lead_plates",
     "leadage:lead_glass",
     "leadage:polished_lead_glass",
-    "leadage:tiled_lead_glass"
+    "leadage:tiled_lead_glass",
+    "leadage:lead_sword",
+    "leadage:lead_pickaxe",
+    "leadage:lead_axe",
+    "leadage:lead_shovel",
+    "leadage:lead_hoe"
   ]
 }

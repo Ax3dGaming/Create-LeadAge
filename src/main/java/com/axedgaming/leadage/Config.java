@@ -38,6 +38,16 @@ public class Config {
 
     public static ForgeConfigSpec.IntValue SATURNISM_EFFECT_THRESHOLD;
 
+    public static ForgeConfigSpec.IntValue SATURNISM_HIT;
+
+    public static ForgeConfigSpec.IntValue LEAD_NAUSEA_CHANCE;
+
+    public static ForgeConfigSpec.IntValue LEAD_POISON_CHANCE;
+
+    public static ForgeConfigSpec.IntValue LEAD_NAUSEA_DURATION;
+
+    public static ForgeConfigSpec.IntValue LEAD_POISON_DURATION;
+
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
@@ -114,6 +124,33 @@ public class Config {
         SATURNISM_EFFECT_THRESHOLD = builder
                 .comment("The lead value you need to have to get the Saturnism effect")
                 .defineInRange("saturnismEffectThreshold", 450, 200, 2000);
+
+        builder.pop();
+
+        builder.push("lead_tools");
+
+        SATURNISM_HIT = builder
+                .comment("Saturnism added when hit by a lead tool")
+                .defineInRange("saturnismHit", 2, 0, 100);
+
+        LEAD_NAUSEA_CHANCE = builder
+                .comment("Chance to apply nausea on hit")
+                .defineInRange("leadNauseaChance", 25, 0, 100);
+
+        LEAD_POISON_CHANCE = builder
+                .comment("Chance to apply poison on hit")
+                .defineInRange("leadPoisonChance", 12, 0, 100);
+
+        LEAD_NAUSEA_DURATION = builder
+                .comment("Duration of the nausea effect (in s)")
+                .defineInRange("leadNauseaDuration", 30, 20, 120);
+
+        LEAD_POISON_DURATION = builder
+                .comment("Duration of the poison effect (in s)")
+                .defineInRange("leadPoisonDuration", 30, 20, 120);
+
+        builder.pop();
+
 
         COMMON_SPEC = builder.build();
     }

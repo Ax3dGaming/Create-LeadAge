@@ -13,5 +13,8 @@ public class ModTags {
 
         public static final TagKey<Item> LEAD_POISONED =
                 TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(LeadAge.MOD_ID, "lead_poisoned"));
+
+        public static final TagKey<Item> LEAD_TOOLS =
+                TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(LeadAge.MOD_ID, "lead_tools"));
     }
 }

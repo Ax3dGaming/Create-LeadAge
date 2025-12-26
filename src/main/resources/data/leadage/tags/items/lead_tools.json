@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "leadage:lead_sword",
+    "leadage:lead_pickaxe",
+    "leadage:lead_axe",
+    "leadage:lead_shovel",
+    "leadage:lead_hoe"
+  ]
+}
