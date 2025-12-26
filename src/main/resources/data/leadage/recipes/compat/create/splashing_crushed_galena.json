@@ -1,0 +1,22 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "leadage:crushed_galena"
+    }
+  ],
+  "results": [
+    {
+      "item": "leadage:lead_nugget",
+      "count": 9
+    },
+    {
+      "item": "create:zinc_nugget",
+      "count": 2
+    },
+    {
+      "item": "create:zinc_nugget",
+      "chance": 0.5
+    }
+  ]
+}
