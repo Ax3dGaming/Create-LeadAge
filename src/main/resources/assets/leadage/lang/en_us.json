@@ -41,6 +41,8 @@
   "tooltip.leadage.salt.summary": "§2Turns §aGrass into Dirt\n§2and §aFarmland into Coarse Dirt§2\nin a §a%1$s §2blocks radius.\n§2When combined with §aany type of food,\n§2make them §apoisoned with lead",
   "tooltip.leadage.ceruse.summary": "§2Usable on you or on someone",
   "tooltip.leadage.ceruse.used": "§aMakes your skin white§2, §ahide your nametag§2,\nand §areduce the distance where mobs\nfollow you to %1$s §ablocks.\n§2For §a%2$s§as",
+  "tooltip.leadage.soldier_head.summary": "§aLead Soldiers §2are strong golems\nable to perform multiple tasks.\nWhen given a sword, they’ll be able\nto§ahunt nearby animals§2, and\n§awill attack monsters §2when wearing\na §aLeather Tunic§2. They also are\ngreat looking §aTrain Drivers§2.",
+  "tooltip.leadage.soldier_head.place": "§7When placed on Block Of Lead\n §2Creates a §aLead Soldier§2.",
 
   "message.leadage.saturnism.none": "§aSaturnism: §20",
   "message.leadage.saturnism.low": "§aSaturnism: §e%1$s",

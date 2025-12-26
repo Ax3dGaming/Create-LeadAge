@@ -3,6 +3,7 @@ package com.axedgaming.leadage.common;
 import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.items.CeruseItem;
 import com.axedgaming.leadage.common.items.DivingWeightItem;
+import com.axedgaming.leadage.common.items.LeadSoldierHeadItem;
 import com.axedgaming.leadage.common.items.SaltItem;
 import com.axedgaming.leadage.common.materials.LeadTier;
 import net.minecraft.world.item.*;
@@ -121,7 +122,7 @@ public class ModItems {
             );
 
     public static final RegistryObject<Item> LEAD_SOLDER_HEAD = ITEMS.register("lead_soldier_head",
-            () -> new BlockItem(ModBlocks.LEAD_SOLDIER_HEAD.get(), new Item.Properties()));
+            () -> new LeadSoldierHeadItem(ModBlocks.LEAD_SOLDIER_HEAD.get(), new Item.Properties()));
 
     public static void registerItems(EventBus eventBus) {
         ITEMS.register(eventBus);
