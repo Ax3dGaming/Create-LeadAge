@@ -18,9 +18,11 @@ public class LeadSoldierRenderer
 
     public LeadSoldierRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER)), 0.5F);
-
-        this.addLayer(new LeadSoldierArmorLayer(this, ctx));
-        this.addLayer(new ItemInHandLayer<>(this, ctx.getItemInHandRenderer()));
+            
+	this.addLayer(new HumanoidArmorLayer(this, new HumanoidModel(ctx.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel(ctx.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), ctx.getModelManager()));
+        //this.addLayer(new LeadSoldierArmorLayer(this, ctx));
+        //this.addLayer(new ItemInHandLayer<>(this, ctx.getItemInHandRenderer()));
+            //should be handled by player layers
     }
 
     @Override
