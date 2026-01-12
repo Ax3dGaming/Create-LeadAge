@@ -159,6 +159,11 @@ public class LeadSoldierEntity extends PathfinderMob {
             this.spawnAtLocation(tunic);
         }
     }
+    
+	@Override
+	public double getMyRidingOffset() {
+		return -0.35D;
+	}
 
     @Override
     protected boolean canRide(Entity vehicle) {
