@@ -1,17 +1,17 @@
 package com.axedgaming.leadage.client.render;
 
 import com.axedgaming.leadage.LeadAge;
-import com.axedgaming.leadage.client.render.layer.LeadSoldierArmorLayer;
 import com.axedgaming.leadage.common.entity.LeadSoldierEntity;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 
 public class LeadSoldierRenderer
-        extends MobRenderer<LeadSoldierEntity, HumanoidModel<LeadSoldierEntity>> {
+        extends HumanoidMobRenderer<LeadSoldierEntity, HumanoidModel<LeadSoldierEntity>> {
 
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(LeadAge.MOD_ID, "textures/entities/lead_soldier.png");
@@ -19,7 +19,7 @@ public class LeadSoldierRenderer
     public LeadSoldierRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER)), 0.5F);
 
-        this.addLayer(new LeadSoldierArmorLayer(this, ctx));
+        this.addLayer(new HumanoidArmorLayer(this, new HumanoidModel(ctx.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel(ctx.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), ctx.getModelManager()));
         this.addLayer(new ItemInHandLayer<>(this, ctx.getItemInHandRenderer()));
     }
 

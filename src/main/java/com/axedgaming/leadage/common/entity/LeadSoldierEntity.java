@@ -1,6 +1,5 @@
 package com.axedgaming.leadage.common.entity;
 
-import com.axedgaming.leadage.Config;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -161,6 +160,11 @@ public class LeadSoldierEntity extends PathfinderMob {
     }
 
     @Override
+    public double getMyRidingOffset() {
+        return -0.35D;
+    }
+
+    @Override
     protected boolean canRide(Entity vehicle) {
         return true;
     }
@@ -219,4 +223,16 @@ public class LeadSoldierEntity extends PathfinderMob {
 
         return false;
     }
+
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        this.swing(InteractionHand.MAIN_HAND);
+        return super.doHurtTarget(target);
+    }
+
+    @Override
+    public boolean isAggressive() {
+        return this.getTarget() != null;
+    }
+
 }
