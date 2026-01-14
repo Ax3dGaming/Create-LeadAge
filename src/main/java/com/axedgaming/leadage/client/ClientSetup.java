@@ -63,6 +63,13 @@ public class ClientSetup {
                     RenderType.cutout()
             );
         });
+
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.LEAD_BARS.get(),
+                    RenderType.cutoutMipped()
+            );
+        });
     }
 
     @SubscribeEvent

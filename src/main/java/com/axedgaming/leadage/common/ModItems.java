@@ -124,6 +124,12 @@ public class ModItems {
     public static final RegistryObject<Item> LEAD_SOLDER_HEAD = ITEMS.register("lead_soldier_head",
             () -> new LeadSoldierHeadItem(ModBlocks.LEAD_SOLDIER_HEAD.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> INCOMPLETE_LEAD_SOLDIER_HEAD = ITEMS.register("incomplete_lead_soldier_head",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> LEAD_BARS = ITEMS.register("lead_bars",
+            () -> new BlockItem(ModBlocks.LEAD_BARS.get(), new Item.Properties()));
+
     public static void registerItems(EventBus eventBus) {
         ITEMS.register(eventBus);
     }

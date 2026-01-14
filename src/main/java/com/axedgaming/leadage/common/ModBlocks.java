@@ -83,6 +83,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> LEAD_SOLDIER_HEAD = BLOCKS.register("lead_soldier_head",
             () -> new LeadSoldierHeadBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BLOCK.get())));
 
+    public static final RegistryObject<Block> LEAD_BARS = BLOCKS.register("lead_bars",
+            () -> new IronBarsBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BLOCK.get()).noOcclusion()));
+
     public static void register(EventBus eventBus){
         BLOCKS.register(eventBus);
     }

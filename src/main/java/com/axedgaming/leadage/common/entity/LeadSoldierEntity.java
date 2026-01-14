@@ -80,6 +80,8 @@ public class LeadSoldierEntity extends Zombie {
     ) {
         SpawnGroupData data = super.finalizeSpawn(level, difficulty, reason, spawnData, tag);
         this.setBaby(false);
+        this.setCanBreakDoors(false);
+        this.setCanPickUpLoot(false);
         this.refreshDimensions();
         return data;
     }

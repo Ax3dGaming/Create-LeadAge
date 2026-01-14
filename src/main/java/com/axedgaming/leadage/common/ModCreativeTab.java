@@ -39,8 +39,10 @@ public class ModCreativeTab {
                         output.accept(ModItems.LEAD_SHOVEL.get());
                         output.accept(ModItems.LEAD_SWORD.get());
                         output.accept(ModItems.LEAD_HOE.get());
+                        output.accept(ModItems.INCOMPLETE_LEAD_SOLDIER_HEAD.get());
                         output.accept(ModItems.LEAD_SOLDER_HEAD.get());
                         output.accept(ModItems.LEAD_SOLDIER_SPAWN_EGG.get());
+                        output.accept(ModItems.LEAD_BARS.get());
                     }).build());
 
     public static void register(EventBus eventBus) {
