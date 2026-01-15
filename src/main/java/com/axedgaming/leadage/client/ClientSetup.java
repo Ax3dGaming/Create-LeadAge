@@ -5,6 +5,7 @@ import com.axedgaming.leadage.client.render.LeadSoldierRenderer;
 import com.axedgaming.leadage.client.render.layer.MaskingLayer;
 import com.axedgaming.leadage.common.ModBlocks;
 import com.axedgaming.leadage.common.ModEntities;
+import com.axedgaming.leadage.common.ModSpriteShifts;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -36,6 +37,8 @@ public class ClientSetup {
     @SubscribeEvent
     @SuppressWarnings("removal")
     public static void clientSetup(FMLClientSetupEvent event) {
+        ModSpriteShifts.register();
+
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(
                     ModBlocks.LEAD_GLASS.get(),

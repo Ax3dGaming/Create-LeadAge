@@ -1,5 +1,6 @@
 {
-  "itemGroup.leadagetab": "Create: Lead Age",
+  "itemGroup.leadage": "Create: Lead Age",
+
   "item.leadage.raw_galena": "Raw Galena",
   "item.leadage.crushed_galena": "Crushed Galena",
   "item.leadage.lead_ingot": "Lead Ingot",

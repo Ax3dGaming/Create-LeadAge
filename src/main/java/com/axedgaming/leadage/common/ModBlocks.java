@@ -2,91 +2,103 @@ package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.blocks.LeadSoldierHeadBlock;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
+import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
+import com.simibubi.create.content.fluids.PipeAttachmentModel;
+import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
+import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.BuilderTransformers;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.eventbus.EventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.material.MapColor;
+
+import static com.axedgaming.leadage.LeadAge.REGISTRATE;
+import static com.simibubi.create.AllBlocks.FLUID_PIPE;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LeadAge.MOD_ID);
 
-    public static final RegistryObject<Block> LEAD_GLANCE = BLOCKS.register("lead_glance",
-            () -> new Block(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_ORE)
-                    .strength(3.0F, 3.0F)
-            ));
+    public static final BlockEntry<Block> LEAD_GLANCE =
+            REGISTRATE.block("lead_glance", Block::new)
+                    .initialProperties(() -> Blocks.IRON_ORE)
+                    .properties(p -> p.strength(3.0F))
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_BLOCK = BLOCKS.register("lead_block",
-            () -> new Block(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_BLOCK)
-                    .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<Block> LEAD_BLOCK =
+            REGISTRATE.block("lead_block", Block::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p.strength(5.0F, 6.0F))
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_BRICKS = BLOCKS.register("lead_bricks",
-            () -> new Block(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_BLOCK)
-                    .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<Block> LEAD_BRICKS =
+            REGISTRATE.block("lead_bricks", Block::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_BRICK_STAIRS = BLOCKS.register("lead_brick_stairs",
-            () -> new StairBlock(
-                    () -> LEAD_BRICKS.get().defaultBlockState(),
-                    BlockBehaviour.Properties
-                            .copy(Blocks.IRON_BLOCK)
-                            .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<StairBlock> LEAD_BRICK_STAIRS =
+            REGISTRATE.block("lead_brick_stairs",
+                            p -> new StairBlock(LEAD_BRICKS.get()::defaultBlockState, p))
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_BRICK_SLAB = BLOCKS.register("lead_brick_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_BLOCK)
-                    .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<SlabBlock> LEAD_BRICK_SLAB =
+            REGISTRATE.block("lead_brick_slab", SlabBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_TILES = BLOCKS.register("lead_tiles",
-            () -> new Block(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_BLOCK)
-                    .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<Block> LEAD_TILES =
+            REGISTRATE.block("lead_tiles", Block::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_PLATES = BLOCKS.register("lead_plates",
-            () -> new Block(BlockBehaviour.Properties
-                    .copy(Blocks.IRON_BLOCK)
-                    .strength(5.0F, 6.0F)
-            ));
+    public static final BlockEntry<Block> LEAD_PLATES =
+            REGISTRATE.block("lead_plates", Block::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_GLASS = BLOCKS.register("lead_glass",
-            () -> new GlassBlock(BlockBehaviour.Properties
-                    .copy(Blocks.GLASS)
-                    .strength(0.3F, 0.3F)
-                    .noOcclusion()
-                    .lightLevel(state -> 3)
-            ));
+    public static final BlockEntry<GlassBlock> LEAD_GLASS =
+            REGISTRATE.block("lead_glass", GlassBlock::new)
+                    .initialProperties(() -> Blocks.GLASS)
+                    .properties(p -> p.noOcclusion().lightLevel(s -> 3))
+                    .register();
 
-    public static final RegistryObject<Block> POLISHED_LEAD_GLASS = BLOCKS.register("polished_lead_glass",
-            () -> new GlassBlock(BlockBehaviour.Properties
-                    .copy(Blocks.GLASS)
-                    .strength(0.3F, 0.3F)
-                    .noOcclusion()
-                    .lightLevel(state -> 3)
-            ));
+    public static final BlockEntry<GlassBlock> POLISHED_LEAD_GLASS =
+            REGISTRATE.block("polished_lead_glass", GlassBlock::new)
+                    .initialProperties(() -> Blocks.GLASS)
+                    .properties(p -> p.noOcclusion().lightLevel(s -> 3))
+                    .register();
 
-    public static final RegistryObject<Block> TILED_LEAD_GLASS = BLOCKS.register("tiled_lead_glass",
-            () -> new GlassBlock(BlockBehaviour.Properties
-                    .copy(Blocks.GLASS)
-                    .strength(0.3F, 0.3F)
-                    .noOcclusion()
-                    .lightLevel(state -> 3)
-            ));
+    public static final BlockEntry<GlassBlock> TILED_LEAD_GLASS =
+            REGISTRATE.block("tiled_lead_glass", GlassBlock::new)
+                    .initialProperties(() -> Blocks.GLASS)
+                    .properties(p -> p.noOcclusion().lightLevel(s -> 3))
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_SOLDIER_HEAD = BLOCKS.register("lead_soldier_head",
-            () -> new LeadSoldierHeadBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BLOCK.get())));
+    public static final BlockEntry<LeadSoldierHeadBlock> LEAD_SOLDIER_HEAD =
+            REGISTRATE.block("lead_soldier_head", LeadSoldierHeadBlock::new)
+                    .initialProperties(() -> LEAD_BLOCK.get())
+                    .register();
 
-    public static final RegistryObject<Block> LEAD_BARS = BLOCKS.register("lead_bars",
-            () -> new IronBarsBlock(BlockBehaviour.Properties.copy(ModBlocks.LEAD_BLOCK.get()).noOcclusion()));
+    public static final BlockEntry<IronBarsBlock> LEAD_BARS =
+            REGISTRATE.block("lead_bars", IronBarsBlock::new)
+                    .initialProperties(() -> LEAD_BLOCK.get())
+                    .properties(p -> p.noOcclusion())
+                    .register();
 
-    public static void register(EventBus eventBus){
-        BLOCKS.register(eventBus);
-    }
+    public static final BlockEntry<CasingBlock> LEAD_CASING =
+            REGISTRATE
+                    .block("lead_casing", CasingBlock::new)
+                    .initialProperties(() -> ModBlocks.LEAD_BLOCK.get())
+                    .transform(BuilderTransformers.casing(() -> ModSpriteShifts.LEAD_CASING))
+                    .register();
+
+    //TODO: Encased fluid pipe
+
+    public static void register() {}
 }
