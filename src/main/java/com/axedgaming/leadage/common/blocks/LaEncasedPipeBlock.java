@@ -1,6 +1,6 @@
 package com.axedgaming.leadage.common.blocks;
 
-import com.axedgaming.leadage.common.ModBlockEntities;
+import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import net.minecraft.world.level.block.Block;
@@ -16,6 +16,6 @@ public class LaEncasedPipeBlock extends EncasedPipeBlock {
 
     @Override
     public BlockEntityType<? extends FluidPipeBlockEntity> getBlockEntityType() {
-        return ModBlockEntities.ENCASED_FLUID_PIPE.get();
+        return AllBlockEntityTypes.FLUID_PIPE.get();
     }
 }
