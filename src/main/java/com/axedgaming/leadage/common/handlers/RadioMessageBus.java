@@ -2,55 +2,70 @@ package com.axedgaming.leadage.common.handlers;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
-import com.axedgaming.leadage.common.utils.RadioConstants;
 import com.axedgaming.leadage.common.utils.RadioInventoryHelper;
+import com.axedgaming.leadage.common.utils.RadioTextHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.AABB;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
-public final class RadioMessageBus {
-    private RadioMessageBus() {}
+public class RadioMessageBus {
 
-    public static void publish(ServerPlayer sender, RadioMessage message) {
-        ServerLevel level = sender.serverLevel();
-        Set<ServerPlayer> delivered = new HashSet<>();
+    public static final int RADIO_BLOCK_RANGE = 16;
 
-        for (ServerPlayer player : level.players()) {
-            if (RadioInventoryHelper.hasReceivingRadioOnFrequency(player, message.frequency())) {
-                sendToPlayer(player, message);
-                delivered.add(player);
+    public static void broadcastPlayerRadioMessage(MinecraftServer server, ServerPlayer sender, int frequency, String message) {
+        Component formatted = RadioTextHelper.formatRadioMessage(frequency, sender.getName().getString(), message);
+
+        Set<UUID> delivered = new HashSet<>();
+
+        // 1) Joueurs avec radio dans la hotbar
+        for (ServerPlayer target : server.getPlayerList().getPlayers()) {
+            if (RadioInventoryHelper.hasReceivingRadioOnFrequency(target, frequency)) {
+                target.sendSystemMessage(formatted);
+                delivered.add(target.getUUID());
             }
         }
 
-        for (RadioBlockEntity radioBe : RadioBlockRegistry.getRadios()) {
-            if (radioBe.isRemoved() || radioBe.getLevel() != level || radioBe.getFrequency() != message.frequency()) {
-                continue;
-            }
+        // 2) Radios posées -> broadcast local
+        for (ServerLevel level : server.getAllLevels()) {
+            broadcastViaPlacedRadios(level, frequency, formatted, delivered);
+            notifyAnalysers(level, frequency, message);
+        }
+    }
 
-            AABB area = new AABB(radioBe.getBlockPos()).inflate(RadioConstants.BROADCAST_RADIUS);
+    private static void broadcastViaPlacedRadios(ServerLevel level, int frequency, Component formatted, Set<UUID> delivered) {
+
+        for (RadioBlockEntity radioBe : RadioWorldRegistry.getRadios(level)) {
+
+            if (radioBe.isRemoved()) continue;
+            if (radioBe.getFrequency() != frequency) continue;
+
+            BlockPos pos = radioBe.getBlockPos();
+
+            AABB area = new AABB(pos).inflate(RADIO_BLOCK_RANGE);
+
             for (ServerPlayer nearby : level.getEntitiesOfClass(ServerPlayer.class, area)) {
-                if (delivered.add(nearby)) {
-                    sendToPlayer(nearby, message);
+                if (delivered.add(nearby.getUUID())) {
+                    nearby.sendSystemMessage(formatted);
                 }
-            }
-        }
-
-        for (RadioAnalyserBlockEntity analyserBe : RadioBlockRegistry.getAnalysers()) {
-            if (analyserBe.isRemoved() || analyserBe.getLevel() != level || analyserBe.getFrequency() != message.frequency()) {
-                continue;
-            }
-
-            if (analyserBe.matches(message.content())) {
-                analyserBe.triggerPulse();
             }
         }
     }
 
-    private static void sendToPlayer(ServerPlayer player, RadioMessage message) {
-        player.sendSystemMessage(Component.literal("[" + message.frequency() + " MHz] " + message.senderName() + ": " + message.content()));
+    private static void notifyAnalysers(ServerLevel level, int frequency, String message) {
+
+        for (RadioAnalyserBlockEntity analyser : RadioWorldRegistry.getAnalysers(level)) {
+
+            if (analyser.isRemoved()) continue;
+            if (analyser.getFrequency() != frequency) continue;
+
+            analyser.onRadioMessageReceived(message);
+        }
     }
 }

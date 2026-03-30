@@ -11,11 +11,11 @@ public interface IRadioFrequencyItem {
         if (!tag.contains(RadioConstants.NBT_FREQUENCY)) {
             tag.putInt(RadioConstants.NBT_FREQUENCY, RadioConstants.DEFAULT_FREQUENCY);
         }
-        return RadioChannelHelper.clampFrequency(tag.getInt(RadioConstants.NBT_FREQUENCY));
+        return RadioConstants.clampFrequency(tag.getInt(RadioConstants.NBT_FREQUENCY));
     }
 
     default void setFrequency(ItemStack stack, int frequency) {
-        stack.getOrCreateTag().putInt(RadioConstants.NBT_FREQUENCY, RadioChannelHelper.clampFrequency(frequency));
+        stack.getOrCreateTag().putInt(RadioConstants.NBT_FREQUENCY, RadioConstants.clampFrequency(frequency));
     }
 
     default boolean canTransmit(ItemStack stack) {

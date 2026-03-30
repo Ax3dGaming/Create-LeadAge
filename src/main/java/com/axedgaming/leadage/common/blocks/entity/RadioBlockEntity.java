@@ -1,11 +1,13 @@
 package com.axedgaming.leadage.common.blocks.entity;
 
 import com.axedgaming.leadage.common.ModBlockEntities;
+import com.axedgaming.leadage.common.handlers.RadioWorldRegistry;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import com.axedgaming.leadage.common.handlers.RadioBlockRegistry;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -21,7 +23,7 @@ public class RadioBlockEntity extends BlockEntity {
     }
 
     public void setFrequency(int frequency) {
-        this.frequency = RadioChannelHelper.clampFrequency(frequency);
+        this.frequency = RadioConstants.clampFrequency(frequency);
         setChanged();
     }
 
@@ -29,23 +31,26 @@ public class RadioBlockEntity extends BlockEntity {
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level != null && !level.isClientSide) {
-            RadioBlockRegistry.registerRadio(this);
+        assert this.level != null;
+        if (!this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
+            RadioWorldRegistry.addRadio(serverLevel, this);
         }
     }
 
     @Override
     public void setRemoved() {
-        super.setRemoved();
-        if (level != null && !level.isClientSide) {
-            RadioBlockRegistry.unregisterRadio(this);
+        assert this.level != null;
+        if (!this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
+            RadioWorldRegistry.removeRadio(serverLevel, this);
         }
+
+        super.setRemoved();
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.frequency = RadioChannelHelper.clampFrequency(tag.getInt(RadioConstants.NBT_FREQUENCY));
+        this.frequency = RadioConstants.clampFrequency(tag.getInt(RadioConstants.NBT_FREQUENCY));
     }
 
     @Override

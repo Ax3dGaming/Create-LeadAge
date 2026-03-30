@@ -1,25 +1,20 @@
 package com.axedgaming.leadage.common.utils;
 
-public final class RadioTextHelper {
+import net.minecraft.network.chat.Component;
+
+public class RadioTextHelper {
+
     private RadioTextHelper() {}
 
-    public static boolean isRadioMessage(String rawMessage) {
-        return rawMessage != null && rawMessage.startsWith("!") && rawMessage.length() > 1;
+    public static Component formatRadioMessage(int frequency, String playerName, String message) {
+        return Component.literal("[" + frequency + " MHz] : <" + playerName + "> - " + message);
     }
 
-    public static String stripRadioPrefix(String rawMessage) {
-        if (rawMessage == null || rawMessage.isBlank()) {
+    public static String normalizeForComparison(String text) {
+        if (text == null) {
             return "";
         }
 
-        if (rawMessage.startsWith("!")) {
-            return rawMessage.substring(1).trim();
-        }
-
-        return rawMessage.trim();
-    }
-
-    public static String normalizeForComparison(String input) {
-        return input == null ? "" : input.trim().toLowerCase();
+        return text.trim().toLowerCase();
     }
 }

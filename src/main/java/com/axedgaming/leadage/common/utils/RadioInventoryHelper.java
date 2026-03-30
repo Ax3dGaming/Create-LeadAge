@@ -1,29 +1,27 @@
 package com.axedgaming.leadage.common.utils;
 
-import com.axedgaming.leadage.common.items.IRadioFrequencyItem;
+import com.axedgaming.leadage.common.items.PortableRadioItem;
+import com.axedgaming.leadage.common.items.RadioItem;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+public class RadioInventoryHelper {
 
-public final class RadioInventoryHelper {
-    private RadioInventoryHelper() {}
-
-    public static ItemStack findPriorityTransmitter(Player player) {
-        ItemStack mainHand = player.getMainHandItem();
-        if (mainHand.getItem() instanceof IRadioFrequencyItem frequencyItem && frequencyItem.canTransmit(mainHand)) {
-            return mainHand;
+    public static ItemStack findPriorityTransmitRadio(Player player) {
+        ItemStack main = player.getMainHandItem();
+        if (isTransmitRadio(main)) {
+            return main;
         }
 
-        ItemStack offHand = player.getOffhandItem();
-        if (offHand.getItem() instanceof IRadioFrequencyItem frequencyItem && frequencyItem.canTransmit(offHand)) {
-            return offHand;
+        ItemStack off = player.getOffhandItem();
+        if (isTransmitRadio(off)) {
+            return off;
         }
 
-        for (int slot = 0; slot < 9; slot++) {
-            ItemStack stack = player.getInventory().getItem(slot);
-            if (stack.getItem() instanceof IRadioFrequencyItem frequencyItem && frequencyItem.canTransmit(stack)) {
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (isTransmitRadio(stack)) {
                 return stack;
             }
         }
@@ -31,23 +29,28 @@ public final class RadioInventoryHelper {
         return ItemStack.EMPTY;
     }
 
-    public static List<ItemStack> getHotbarRadios(Player player) {
-        List<ItemStack> radios = new ArrayList<>();
-        for (int slot = 0; slot < 9; slot++) {
-            ItemStack stack = player.getInventory().getItem(slot);
-            if (stack.getItem() instanceof IRadioFrequencyItem) {
-                radios.add(stack);
-            }
-        }
-        return radios;
-    }
-
     public static boolean hasReceivingRadioOnFrequency(Player player, int frequency) {
-        for (ItemStack stack : getHotbarRadios(player)) {
-            if (stack.getItem() instanceof IRadioFrequencyItem frequencyItem && frequencyItem.getFrequency(stack) == frequency) {
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (isReceivingRadio(stack) && getFrequency(stack) == frequency) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean isTransmitRadio(ItemStack stack) {
+        return !stack.isEmpty() && stack.getItem() instanceof RadioItem;
+    }
+
+    public static boolean isReceivingRadio(ItemStack stack) {
+        return !stack.isEmpty() && (
+                stack.getItem() instanceof RadioItem ||
+                        stack.getItem() instanceof PortableRadioItem
+        );
+    }
+
+    public static int getFrequency(ItemStack stack) {
+        return RadioChannelHelper.getFrequency(stack);
     }
 }

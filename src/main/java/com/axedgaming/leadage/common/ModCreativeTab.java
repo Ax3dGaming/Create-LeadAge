@@ -32,6 +32,8 @@ public class ModCreativeTab {
                                 output.accept(ModItems.INCOMPLETE_LEAD_SOLDIER_HEAD);
                                 output.accept(ModItems.LEAD_SOLDER_HEAD);
                                 output.accept(ModItems.LEAD_SOLDIER_SPAWN_EGG);
+                                output.accept(ModItems.RADIO);
+                                output.accept(ModItems.PORTABLE_RADIO);
 
                                 /* Tools & Armor */
                                 output.accept(ModItems.LEAD_PICKAXE);

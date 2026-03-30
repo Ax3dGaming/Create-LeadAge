@@ -1,10 +1,7 @@
 package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.LeadAge;
-import com.axedgaming.leadage.common.items.CeruseItem;
-import com.axedgaming.leadage.common.items.DivingWeightItem;
-import com.axedgaming.leadage.common.items.LeadSoldierHeadItem;
-import com.axedgaming.leadage.common.items.SaltItem;
+import com.axedgaming.leadage.common.items.*;
 import com.axedgaming.leadage.common.materials.LeadTier;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.*;
@@ -137,6 +134,16 @@ public class ModItems {
     public static final ItemEntry<BlockItem> LEAD_CASING =
             LeadAge.REGISTRATE.item("lead_casing",
                             p -> new BlockItem(ModBlocks.LEAD_CASING.get(), p))
+                    .register();
+
+    public static final ItemEntry<RadioItem> RADIO =
+            LeadAge.REGISTRATE.item("radio", RadioItem::new)
+                    .properties(p -> p.stacksTo(1))
+                    .register();
+
+    public static final ItemEntry<PortableRadioItem> PORTABLE_RADIO =
+            LeadAge.REGISTRATE.item("portable_radio",
+                    PortableRadioItem::new)
                     .register();
 
     public static void register() {}

@@ -1,43 +1,52 @@
 package com.axedgaming.leadage.common.handlers;
 
-import com.axedgaming.leadage.common.items.IRadioFrequencyItem;
 import com.axedgaming.leadage.common.utils.RadioInventoryHelper;
-import com.axedgaming.leadage.common.utils.RadioTextHelper;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraft.network.chat.Component;
 
 @Mod.EventBusSubscriber(modid = "leadage")
-public final class RadioChatHandler {
-    private RadioChatHandler() {}
+public class RadioChatHandler {
 
     @SubscribeEvent
     public static void onServerChat(ServerChatEvent event) {
-        String rawMessage = String.valueOf(event.getMessage());
-        if (!RadioTextHelper.isRadioMessage(rawMessage)) {
-            return;
-        }
-
         ServerPlayer player = event.getPlayer();
-        ItemStack transmitter = RadioInventoryHelper.findPriorityTransmitter(player);
 
-        if (transmitter.isEmpty() || !(transmitter.getItem() instanceof IRadioFrequencyItem frequencyItem)) {
-            player.sendSystemMessage(Component.literal("Aucune radio utilisable trouvée pour émettre."));
-            event.setCanceled(true);
+        String rawMessage = event.getMessage().getString();
+        if (rawMessage == null || rawMessage.isBlank()) {
             return;
         }
 
-        String content = RadioTextHelper.stripRadioPrefix(rawMessage);
-        if (content.isBlank()) {
-            event.setCanceled(true);
+        if (!rawMessage.startsWith("!")) {
             return;
         }
 
-        int frequency = frequencyItem.getFrequency(transmitter);
-        RadioMessageBus.publish(player, RadioMessage.fromPlayer(player, frequency, content));
+        String radioMessage = rawMessage.substring(1).trim();
+
+        // on consomme quand même le message public
         event.setCanceled(true);
+
+        if (radioMessage.isEmpty()) {
+            player.sendSystemMessage(Component.literal("§7[Radio] Message vide."));
+            return;
+        }
+
+        ItemStack transmitter = RadioInventoryHelper.findPriorityTransmitRadio(player);
+        if (transmitter.isEmpty()) {
+            player.sendSystemMessage(Component.literal("§7[Radio] Aucune radio émettrice trouvée."));
+            return;
+        }
+
+        int frequency = RadioInventoryHelper.getFrequency(transmitter);
+
+        RadioMessageBus.broadcastPlayerRadioMessage(
+                player.server,
+                player,
+                frequency,
+                radioMessage
+        );
     }
 }

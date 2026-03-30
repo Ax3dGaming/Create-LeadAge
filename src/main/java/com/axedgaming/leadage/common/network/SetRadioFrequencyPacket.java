@@ -4,6 +4,7 @@ import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
 import com.axedgaming.leadage.common.items.IRadioFrequencyItem;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
+import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,7 +21,7 @@ public class SetRadioFrequencyPacket {
     public SetRadioFrequencyPacket(boolean targetBlock, BlockPos pos, int frequency) {
         this.targetBlock = targetBlock;
         this.pos = pos;
-        this.frequency = RadioChannelHelper.clampFrequency(frequency);
+        this.frequency = RadioConstants.clampFrequency(frequency);
     }
 
     public static void encode(SetRadioFrequencyPacket packet, FriendlyByteBuf buffer) {
