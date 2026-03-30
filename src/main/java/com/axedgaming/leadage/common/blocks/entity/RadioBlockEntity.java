@@ -1,5 +1,6 @@
 package com.axedgaming.leadage.common.blocks.entity;
 
+import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ public class RadioBlockEntity extends BlockEntity {
     private int frequency = RadioConstants.DEFAULT_FREQUENCY;
 
     public RadioBlockEntity(BlockPos pos, BlockState state) {
-        super(com.axedgaming.leadage.common.blocks.ModBlockEntities.RADIO_BE.get(), pos, state);
+        super(ModBlockEntities.RADIO_BE.get(), pos, state);
     }
 
     public int getFrequency() {

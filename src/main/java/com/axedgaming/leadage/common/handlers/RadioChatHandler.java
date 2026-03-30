@@ -16,7 +16,7 @@ public final class RadioChatHandler {
 
     @SubscribeEvent
     public static void onServerChat(ServerChatEvent event) {
-        String rawMessage = event.getMessage();
+        String rawMessage = String.valueOf(event.getMessage());
         if (!RadioTextHelper.isRadioMessage(rawMessage)) {
             return;
         }
