@@ -2,6 +2,8 @@ package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.common.blocks.LaEncasedPipeBlock;
 import com.axedgaming.leadage.common.blocks.LeadSoldierHeadBlock;
+import com.axedgaming.leadage.common.blocks.RadioAnalyserBlock;
+import com.axedgaming.leadage.common.blocks.RadioBlock;
 import com.axedgaming.leadage.common.utils.EncasedPipes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
@@ -115,6 +117,15 @@ public class ModBlocks {
                     ModSpriteShifts.LEAD_CASING
             );
 
+    public static final BlockEntry<RadioBlock> RADIO =
+            REGISTRATE.block("radio", RadioBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
+
+    public static final BlockEntry<RadioAnalyserBlock> RADIO_ANALYSER =
+            REGISTRATE.block("radio", RadioAnalyserBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
 
     public static void register() {}
 }

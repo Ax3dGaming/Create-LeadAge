@@ -8,7 +8,6 @@ import com.axedgaming.leadage.common.items.SaltItem;
 import com.axedgaming.leadage.common.materials.LeadTier;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 
 public class ModItems {
