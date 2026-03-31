@@ -1,5 +1,6 @@
 package com.axedgaming.leadage.common.items;
 
+import com.axedgaming.leadage.client.RadioClientHooks;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -37,7 +38,10 @@ public class RadioItem extends Item implements IRadioFrequencyItem {
             player.displayClientMessage(Component.literal("Radio réglée sur " + RadioChannelHelper.formatFrequency(next)), true);
         }
 
-        // TODO: brancher ici la value box / scroll input de Create côté client.
+        if (level.isClientSide) {
+            RadioClientHooks.openFrequencyScreen(hand, RadioChannelHelper.getFrequency(stack));
+        }
+
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
     }
 

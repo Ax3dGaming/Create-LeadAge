@@ -8,9 +8,10 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-public class NetworkHandler {
+public final class NetworkHandler {
 
     private static final String PROTOCOL = "1";
+
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(LeadAge.MOD_ID, "main"),
             () -> PROTOCOL,
@@ -19,6 +20,8 @@ public class NetworkHandler {
     );
 
     private static int index = 0;
+
+    private NetworkHandler() {}
 
     public static void register() {
         CHANNEL.registerMessage(
@@ -34,6 +37,22 @@ public class NetworkHandler {
                 .decoder(SaturnismSyncPacket::decode)
                 .consumerMainThread(SaturnismSyncPacket::handle)
                 .add();
+
+        CHANNEL.registerMessage(
+                index++,
+                SetRadioFrequencyPacket.class,
+                SetRadioFrequencyPacket::encode,
+                SetRadioFrequencyPacket::decode,
+                SetRadioFrequencyPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                index++,
+                SetHeldRadioFrequencyPacket.class,
+                SetHeldRadioFrequencyPacket::encode,
+                SetHeldRadioFrequencyPacket::decode,
+                SetHeldRadioFrequencyPacket::handle
+        );
     }
 
     public static void sendToTracking(Player player, Object msg) {
@@ -46,5 +65,9 @@ public class NetworkHandler {
 
     public static void sendTo(ServerPlayer player, Object msg) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), msg);
+    }
+
+    public static void sendToServer(Object msg) {
+        CHANNEL.sendToServer(msg);
     }
 }

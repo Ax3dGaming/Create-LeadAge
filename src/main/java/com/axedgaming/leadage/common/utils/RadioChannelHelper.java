@@ -3,6 +3,8 @@ package com.axedgaming.leadage.common.utils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Locale;
+
 public class RadioChannelHelper {
 
     private static final String NBT_FREQUENCY = "Frequency";
@@ -22,10 +24,6 @@ public class RadioChannelHelper {
         return RadioConstants.clampFrequency(tag.getInt(NBT_FREQUENCY));
     }
 
-    public static String formatFrequency(int frequency) {
-        return RadioConstants.clampFrequency(frequency) + " MHz";
-    }
-
     public static void setFrequency(ItemStack stack, int frequency) {
         if (stack == null || stack.isEmpty()) {
             return;
@@ -33,5 +31,13 @@ public class RadioChannelHelper {
 
         CompoundTag tag = stack.getOrCreateTag();
         tag.putInt(NBT_FREQUENCY, RadioConstants.clampFrequency(frequency));
+    }
+
+    public static String formatFrequency(int frequency) {
+        return String.format(Locale.ROOT, "%.1f MHz", frequency / 10.0D);
+    }
+
+    public static String formatFrequencyBracket(int frequency) {
+        return "[" + formatFrequency(frequency) + "]";
     }
 }

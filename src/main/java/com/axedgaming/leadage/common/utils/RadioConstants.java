@@ -2,9 +2,17 @@ package com.axedgaming.leadage.common.utils;
 
 public class RadioConstants {
 
-    public static final int MIN_FREQUENCY = 76;
-    public static final int MAX_FREQUENCY = 108;
-    public static final int DEFAULT_FREQUENCY = 92;
+
+
+    public static final int MIN_FREQUENCY = 760; // 76.0 MHz
+    public static final int MAX_FREQUENCY = 1080; // 108.0 MHz
+    public static final int DEFAULT_FREQUENCY = 920; // 92.0 MHz
+
+    public static final int NORMAL_STEP = 10; // 1.0 MHz
+    public static final int FINE_STEP = 1;    // 0.1 MHz
+    public static final int FAST_STEP = 50;   // 5.0 MHz
+
+
     public static final int RADIO_BLOCK_RANGE = 16;
     public static final int ANALYSER_PULSE_TICKS = 20;
 

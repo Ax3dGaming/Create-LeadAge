@@ -7,7 +7,7 @@ public class RadioTextHelper {
     private RadioTextHelper() {}
 
     public static Component formatRadioMessage(int frequency, String playerName, String message) {
-        return Component.literal("[" + frequency + " MHz] : <" + playerName + "> - " + message);
+        return Component.literal(RadioChannelHelper.formatFrequencyBracket(frequency) + " : <" + playerName + "> - " + message);
     }
 
     public static String normalizeForComparison(String text) {
