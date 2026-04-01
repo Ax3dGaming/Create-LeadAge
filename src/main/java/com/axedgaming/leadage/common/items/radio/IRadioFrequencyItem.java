@@ -1,6 +1,5 @@
-package com.axedgaming.leadage.common.items;
+package com.axedgaming.leadage.common.items.radio;
 
-import com.axedgaming.leadage.common.utils.RadioChannelHelper;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

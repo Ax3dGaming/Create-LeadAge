@@ -2,6 +2,8 @@ package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.items.*;
+import com.axedgaming.leadage.common.items.radio.PortableRadioItem;
+import com.axedgaming.leadage.common.items.radio.RadioItem;
 import com.axedgaming.leadage.common.materials.LeadTier;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.*;

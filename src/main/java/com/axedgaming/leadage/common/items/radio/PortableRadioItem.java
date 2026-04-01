@@ -1,4 +1,4 @@
-package com.axedgaming.leadage.common.items;
+package com.axedgaming.leadage.common.items.radio;
 
 import com.axedgaming.leadage.client.RadioClientHooks;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
@@ -30,7 +30,7 @@ public class PortableRadioItem extends Item implements IRadioFrequencyItem {
                 next = com.axedgaming.leadage.common.utils.RadioConstants.MIN_FREQUENCY;
             }
             setFrequency(stack, next);
-            player.displayClientMessage(Component.literal("Portable Radio réglée sur " + RadioChannelHelper.formatFrequency(next)), true);
+            player.displayClientMessage(Component.translatable("utils.leadage.portable_radio.set", RadioChannelHelper.formatFrequency(next)), true);
         }
 
         if (level.isClientSide) {
@@ -42,7 +42,7 @@ public class PortableRadioItem extends Item implements IRadioFrequencyItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("Fréquence: " + RadioChannelHelper.formatFrequency(getFrequency(stack))).withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.literal("Reçoit seulement les messages.").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("utils.leadage.frequency", RadioChannelHelper.formatFrequency(getFrequency(stack))).withStyle(ChatFormatting.GOLD));
+        tooltip.add(Component.translatable("utils.leadage.only_receive").withStyle(ChatFormatting.GRAY));
     }
 }

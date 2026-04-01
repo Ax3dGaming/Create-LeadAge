@@ -50,5 +50,20 @@
   "message.leadage.saturnism.none": "§aSaturnism: §20",
   "message.leadage.saturnism.low": "§aSaturnism: §e%1$s",
   "message.leadage.saturnism.mid": "§aSaturnism: §6%1$s",
-  "message.leadage.saturnism.high": "§aSaturnism: §c%1$s"
+  "message.leadage.saturnism.high": "§aSaturnism: §c%1$s",
+
+  "ui.leadage.radio.validate": "Validate",
+  "ui.leadage.radio.reset": "Reset",
+  "ui.leadage.radio.frequency": "Radio Frequency",
+  "ui.leadage.radio.tuning": "Radio Tuning",
+
+  "utils.leadage.analyser.set": "Analyser set to %s MHz",
+  "utils.leadage.portable_radio.set": "Portable radio set to %s",
+  "utils.leadage.radio.set": "Radio set to %s",
+  "utils.leadage.frequency": "Frequency: %s",
+  "utils.leadage.only_receive": "Only receive messages.",
+  "utils.leadage.send": "Start a message with ! to send it.",
+
+  "chat.leadage.radio.empty": "§7[Radio] Empty message.",
+  "chat.leadage.radio.not_found": "§7[Radio] No transmitting radio found."
 }

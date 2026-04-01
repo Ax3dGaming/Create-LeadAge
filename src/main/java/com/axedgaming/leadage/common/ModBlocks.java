@@ -2,37 +2,16 @@ package com.axedgaming.leadage.common;
 
 import com.axedgaming.leadage.common.blocks.LaEncasedPipeBlock;
 import com.axedgaming.leadage.common.blocks.LeadSoldierHeadBlock;
-import com.axedgaming.leadage.common.blocks.RadioAnalyserBlock;
-import com.axedgaming.leadage.common.blocks.RadioBlock;
+import com.axedgaming.leadage.common.blocks.radio.RadioAnalyserBlock;
+import com.axedgaming.leadage.common.blocks.radio.RadioBlock;
 import com.axedgaming.leadage.common.utils.EncasedPipes;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllSpriteShifts;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
-import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
-import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
-import com.simibubi.create.content.fluids.PipeAttachmentModel;
-import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
-import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
-import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.BuilderTransformers;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.SharedProperties;
-import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-
-import java.util.function.Supplier;
 
 import static com.axedgaming.leadage.LeadAge.REGISTRATE;
-import static com.simibubi.create.AllBlocks.FLUID_PIPE;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 public class ModBlocks {
 

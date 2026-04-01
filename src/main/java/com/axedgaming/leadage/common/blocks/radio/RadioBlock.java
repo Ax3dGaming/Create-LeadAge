@@ -1,4 +1,4 @@
-package com.axedgaming.leadage.common.blocks;
+package com.axedgaming.leadage.common.blocks.radio;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
 import net.minecraft.core.BlockPos;

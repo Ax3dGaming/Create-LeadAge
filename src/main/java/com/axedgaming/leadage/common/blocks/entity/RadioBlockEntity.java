@@ -1,12 +1,10 @@
 package com.axedgaming.leadage.common.blocks.entity;
 
 import com.axedgaming.leadage.common.ModBlockEntities;
-import com.axedgaming.leadage.common.handlers.RadioWorldRegistry;
-import com.axedgaming.leadage.common.utils.RadioChannelHelper;
+import com.axedgaming.leadage.common.handlers.radio.RadioWorldRegistry;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import com.axedgaming.leadage.common.handlers.RadioBlockRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

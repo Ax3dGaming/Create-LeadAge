@@ -18,7 +18,7 @@ public class RadioFrequencyScreen extends Screen {
     private FrequencySlider slider;
 
     public RadioFrequencyScreen(InteractionHand hand, int currentFrequency) {
-        super(Component.literal("Radio Frequency"));
+        super(Component.translatable("ui.leadage.radio.frequency"));
         this.hand = hand;
         this.initialFrequency = RadioConstants.clampFrequency(currentFrequency);
     }
@@ -31,12 +31,12 @@ public class RadioFrequencyScreen extends Screen {
         slider = new FrequencySlider(centerX - 100, centerY - 10, 200, 20, initialFrequency);
         addRenderableWidget(slider);
 
-        addRenderableWidget(Button.builder(Component.literal("Valider"), button -> {
+        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.radio.validate"), button -> {
             NetworkHandler.sendToServer(new SetHeldRadioFrequencyPacket(hand, slider.getFrequency()));
             onClose();
         }).bounds(centerX - 102, centerY + 20, 98, 20).build());
 
-        addRenderableWidget(Button.builder(Component.literal("Reset"), button -> {
+        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.radio.reset"), button -> {
             slider.setFrequency(RadioConstants.DEFAULT_FREQUENCY);
         }).bounds(centerX + 4, centerY + 20, 98, 20).build());
     }
@@ -49,7 +49,7 @@ public class RadioFrequencyScreen extends Screen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        graphics.drawCenteredString(this.font, "Réglage de la radio", centerX, centerY - 42, 0xFFFFFF);
+        graphics.drawCenteredString(this.font, Component.translatable("ui.leadage.radio.tuning"), centerX, centerY - 42, 0xFFFFFF);
         graphics.drawCenteredString(this.font, RadioChannelHelper.formatFrequency(slider.getFrequency()), centerX, centerY - 28, 0xFFD37F);
         graphics.drawCenteredString(this.font, "Normal: 1.0  |  Shift: 0.1  |  Alt: 5.0", centerX, centerY + 48, 0xA0A0A0);
     }
@@ -82,7 +82,6 @@ public class RadioFrequencyScreen extends Screen {
 
         @Override
         protected void applyValue() {
-            // géré manuellement dans updateFromMouse pour supporter les steps variables
         }
 
         @Override

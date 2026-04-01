@@ -1,4 +1,4 @@
-package com.axedgaming.leadage.common.handlers;
+package com.axedgaming.leadage.common.handlers.radio;
 
 import net.minecraft.server.level.ServerPlayer;
 

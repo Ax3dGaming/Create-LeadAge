@@ -1,4 +1,4 @@
-package com.axedgaming.leadage.common.handlers;
+package com.axedgaming.leadage.common.handlers.radio;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
@@ -24,7 +24,6 @@ public class RadioMessageBus {
 
         Set<UUID> delivered = new HashSet<>();
 
-        // 1) Joueurs avec radio dans la hotbar
         for (ServerPlayer target : server.getPlayerList().getPlayers()) {
             if (RadioInventoryHelper.hasReceivingRadioOnFrequency(target, frequency)) {
                 target.sendSystemMessage(formatted);
@@ -32,7 +31,6 @@ public class RadioMessageBus {
             }
         }
 
-        // 2) Radios posées -> broadcast local
         for (ServerLevel level : server.getAllLevels()) {
             broadcastViaPlacedRadios(level, frequency, formatted, delivered);
             notifyAnalysers(level, frequency, message);

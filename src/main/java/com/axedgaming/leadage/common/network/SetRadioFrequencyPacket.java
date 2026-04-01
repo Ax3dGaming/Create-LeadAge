@@ -2,8 +2,7 @@ package com.axedgaming.leadage.common.network;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
-import com.axedgaming.leadage.common.items.IRadioFrequencyItem;
-import com.axedgaming.leadage.common.utils.RadioChannelHelper;
+import com.axedgaming.leadage.common.items.radio.IRadioFrequencyItem;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

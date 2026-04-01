@@ -1,5 +1,6 @@
-package com.axedgaming.leadage.common.handlers;
+package com.axedgaming.leadage.common.handlers.radio;
 
+import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.utils.RadioInventoryHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -8,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.network.chat.Component;
 
-@Mod.EventBusSubscriber(modid = "leadage")
+@Mod.EventBusSubscriber(modid = LeadAge.MOD_ID)
 public class RadioChatHandler {
 
     @SubscribeEvent
@@ -26,17 +27,16 @@ public class RadioChatHandler {
 
         String radioMessage = rawMessage.substring(1).trim();
 
-        // on consomme quand même le message public
         event.setCanceled(true);
 
         if (radioMessage.isEmpty()) {
-            player.sendSystemMessage(Component.literal("§7[Radio] Message vide."));
+            player.sendSystemMessage(Component.translatable("chat.leadage.radio.empty"));
             return;
         }
 
         ItemStack transmitter = RadioInventoryHelper.findPriorityTransmitRadio(player);
         if (transmitter.isEmpty()) {
-            player.sendSystemMessage(Component.literal("§7[Radio] Aucune radio émettrice trouvée."));
+            player.sendSystemMessage(Component.translatable("chat.leadage.radio.not_found"));
             return;
         }
 

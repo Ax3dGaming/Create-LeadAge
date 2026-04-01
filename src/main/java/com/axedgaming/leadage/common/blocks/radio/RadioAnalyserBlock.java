@@ -1,8 +1,9 @@
-package com.axedgaming.leadage.common.blocks;
+package com.axedgaming.leadage.common.blocks.radio;
 
 import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -68,7 +69,7 @@ public class RadioAnalyserBlock extends BaseEntityBlock {
             if (next > 108) next = 76;
             be.setFrequency(next);
             level.setBlock(pos, state.setValue(FREQUENCY, next), 3);
-            player.displayClientMessage(net.minecraft.network.chat.Component.literal("Analyser réglé sur " + next + " MHz"), true);
+            player.displayClientMessage(Component.translatable("utils.leadage.analyser.set", next), true);
         }
 
         // TODO: ouvrir un menu pour modifier targetText.

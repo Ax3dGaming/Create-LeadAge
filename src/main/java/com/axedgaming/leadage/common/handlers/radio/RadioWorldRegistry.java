@@ -1,4 +1,4 @@
-package com.axedgaming.leadage.common.handlers;
+package com.axedgaming.leadage.common.handlers.radio;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;

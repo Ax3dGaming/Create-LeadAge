@@ -1,10 +1,8 @@
 package com.axedgaming.leadage.common.blocks.entity;
 
 import com.axedgaming.leadage.common.ModBlockEntities;
-import com.axedgaming.leadage.common.blocks.RadioAnalyserBlock;
-import com.axedgaming.leadage.common.handlers.RadioBlockRegistry;
-import com.axedgaming.leadage.common.handlers.RadioWorldRegistry;
-import com.axedgaming.leadage.common.utils.RadioChannelHelper;
+import com.axedgaming.leadage.common.blocks.radio.RadioAnalyserBlock;
+import com.axedgaming.leadage.common.handlers.radio.RadioWorldRegistry;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import com.axedgaming.leadage.common.utils.RadioTextHelper;
 import net.minecraft.core.BlockPos;

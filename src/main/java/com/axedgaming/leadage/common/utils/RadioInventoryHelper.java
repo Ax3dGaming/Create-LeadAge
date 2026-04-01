@@ -1,8 +1,7 @@
 package com.axedgaming.leadage.common.utils;
 
-import com.axedgaming.leadage.common.items.PortableRadioItem;
-import com.axedgaming.leadage.common.items.RadioItem;
-import net.minecraft.server.level.ServerPlayer;
+import com.axedgaming.leadage.common.items.radio.PortableRadioItem;
+import com.axedgaming.leadage.common.items.radio.RadioItem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
