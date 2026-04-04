@@ -48,6 +48,8 @@ public class Config {
 
     public static ForgeConfigSpec.IntValue LEAD_POISON_DURATION;
 
+    public static ForgeConfigSpec.IntValue RADIO_RANGE;
+
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
@@ -150,6 +152,12 @@ public class Config {
                 .defineInRange("leadPoisonDuration", 30, 20, 120);
 
         builder.pop();
+
+        builder.push("radio");
+
+        RADIO_RANGE = builder
+                .comment("Range where the Radio block broadcasts message")
+                .defineInRange("radioRange", 16, 8, 64);
 
         COMMON_SPEC = builder.build();
     }

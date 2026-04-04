@@ -139,8 +139,8 @@ public class ModItems {
                     .register();
 
     public static final ItemEntry<RadioItem> RADIO =
-            LeadAge.REGISTRATE.item("radio", RadioItem::new)
-                    .properties(p -> p.stacksTo(1))
+            LeadAge.REGISTRATE.item("radio",
+                            p -> new RadioItem(ModBlocks.RADIO.get(), p.stacksTo(1)))
                     .register();
 
     public static final ItemEntry<PortableRadioItem> PORTABLE_RADIO =

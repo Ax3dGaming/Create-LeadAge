@@ -1,5 +1,7 @@
 package com.axedgaming.leadage.common.utils;
 
+import com.axedgaming.leadage.Config;
+
 public class RadioConstants {
 
 
@@ -13,7 +15,7 @@ public class RadioConstants {
     public static final int FAST_STEP = 50;   // 5.0 MHz
 
 
-    public static final int RADIO_BLOCK_RANGE = 16;
+    public static final int RADIO_BLOCK_RANGE = Config.RADIO_RANGE.get();
     public static final int ANALYSER_PULSE_TICKS = 20;
 
     public static final String NBT_FREQUENCY = "Frequency";

@@ -2,6 +2,7 @@ package com.axedgaming.leadage.common.handlers.radio;
 
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
 import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
+import com.axedgaming.leadage.common.utils.RadioConstants;
 import com.axedgaming.leadage.common.utils.RadioInventoryHelper;
 import com.axedgaming.leadage.common.utils.RadioTextHelper;
 import net.minecraft.core.BlockPos;
@@ -16,8 +17,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class RadioMessageBus {
-
-    public static final int RADIO_BLOCK_RANGE = 16;
 
     public static void broadcastPlayerRadioMessage(MinecraftServer server, ServerPlayer sender, int frequency, String message) {
         Component formatted = RadioTextHelper.formatRadioMessage(frequency, sender.getName().getString(), message);
@@ -46,7 +45,7 @@ public class RadioMessageBus {
 
             BlockPos pos = radioBe.getBlockPos();
 
-            AABB area = new AABB(pos).inflate(RADIO_BLOCK_RANGE);
+            AABB area = new AABB(pos).inflate(RadioConstants.RADIO_BLOCK_RANGE);
 
             for (ServerPlayer nearby : level.getEntitiesOfClass(ServerPlayer.class, area)) {
                 if (delivered.add(nearby.getUUID())) {

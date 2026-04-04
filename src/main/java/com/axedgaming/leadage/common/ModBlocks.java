@@ -1,9 +1,11 @@
 package com.axedgaming.leadage.common;
 
+import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.common.blocks.LaEncasedPipeBlock;
 import com.axedgaming.leadage.common.blocks.LeadSoldierHeadBlock;
 import com.axedgaming.leadage.common.blocks.radio.RadioAnalyserBlock;
 import com.axedgaming.leadage.common.blocks.radio.RadioBlock;
+import com.axedgaming.leadage.common.items.radio.RadioItem;
 import com.axedgaming.leadage.common.utils.EncasedPipes;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.foundation.data.BuilderTransformers;
@@ -89,20 +91,20 @@ public class ModBlocks {
                     .transform(BuilderTransformers.casing(() -> ModSpriteShifts.LEAD_CASING))
                     .register();
 
-    public static final BlockEntry<LaEncasedPipeBlock> LEAD_ENCASED_FLUID_PIPE =
+    /*public static final BlockEntry<LaEncasedPipeBlock> LEAD_ENCASED_FLUID_PIPE =
             EncasedPipes.createEncasedFluidPipe(
                     "lead",
                     LEAD_CASING::get,
                     ModSpriteShifts.LEAD_CASING
-            );
-
-    public static final BlockEntry<RadioBlock> RADIO =
-            REGISTRATE.block("radio", RadioBlock::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-                    .register();
+            );*/
 
     public static final BlockEntry<RadioAnalyserBlock> RADIO_ANALYSER =
             REGISTRATE.block("radio", RadioAnalyserBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .register();
+
+    public static final BlockEntry<RadioBlock> RADIO =
+            LeadAge.REGISTRATE.block("radio", RadioBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .register();
 
