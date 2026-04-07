@@ -4,17 +4,17 @@ import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.blocks.radio.RadioAnalyserBlock;
 import com.axedgaming.leadage.common.handlers.radio.RadioWorldRegistry;
 import com.axedgaming.leadage.common.utils.RadioConstants;
-import com.axedgaming.leadage.common.utils.RadioTextHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class RadioAnalyserBlockEntity extends BlockEntity {
     private int frequency = RadioConstants.DEFAULT_FREQUENCY;
-    private String targetMessage = "";
     private int pulseTicks = 0;
 
     public RadioAnalyserBlockEntity(BlockPos pos, BlockState state) {
@@ -26,22 +26,29 @@ public class RadioAnalyserBlockEntity extends BlockEntity {
     }
 
     public void setFrequency(int frequency) {
-        this.frequency = RadioConstants.clampFrequency(frequency);
+        int clamped = RadioConstants.clampFrequency(frequency);
+        this.frequency = clamped;
         setChanged();
+
+        if (level != null && !level.isClientSide) {
+            BlockState state = getBlockState();
+
+            if (state.hasProperty(RadioAnalyserBlock.FREQUENCY)
+                    && state.getValue(RadioAnalyserBlock.FREQUENCY) != clamped) {
+                level.setBlock(worldPosition, state.setValue(RadioAnalyserBlock.FREQUENCY, clamped), 3);
+            } else {
+                level.sendBlockUpdated(worldPosition, state, state, 3);
+            }
+        }
     }
 
-    public String getTargetText() {
-        return targetMessage;
+    public int getPulseTicks() {
+        return pulseTicks;
     }
 
-    public void setTargetText(String targetText) {
-        this.targetMessage = targetText == null ? "" : targetText;
-        setChanged();
-    }
-
-    public boolean matches(String incomingMessage) {
-        return RadioTextHelper.normalizeForComparison(targetMessage)
-                .equals(RadioTextHelper.normalizeForComparison(incomingMessage));
+    public boolean isPowered() {
+        BlockState state = getBlockState();
+        return state.hasProperty(RadioAnalyserBlock.POWERED) && state.getValue(RadioAnalyserBlock.POWERED);
     }
 
     public void triggerPulse() {
@@ -50,58 +57,67 @@ public class RadioAnalyserBlockEntity extends BlockEntity {
         }
 
         pulseTicks = RadioConstants.ANALYSER_PULSE_TICKS;
-        level.setBlock(worldPosition, getBlockState().setValue(RadioAnalyserBlock.POWERED, Boolean.TRUE), 3);
+
+        BlockState state = getBlockState();
+        if (state.hasProperty(RadioAnalyserBlock.POWERED) && !state.getValue(RadioAnalyserBlock.POWERED)) {
+            level.setBlock(worldPosition, state.setValue(RadioAnalyserBlock.POWERED, true), 3);
+        } else {
+            level.sendBlockUpdated(worldPosition, state, state, 3);
+        }
+
         level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
         setChanged();
     }
 
+    public void onRadioMessageReceived(String incomingMessage) {
+        triggerPulse();
+    }
+
     public static void serverTick(Level level, BlockPos pos, BlockState state, RadioAnalyserBlockEntity be) {
-        if (level.isClientSide || be.pulseTicks <= 0) {
+        if (level.isClientSide) {
+            return;
+        }
+
+        if (be.pulseTicks <= 0) {
             return;
         }
 
         be.pulseTicks--;
-        if (be.pulseTicks == 0 && state.getValue(RadioAnalyserBlock.POWERED)) {
-            level.setBlock(pos, state.setValue(RadioAnalyserBlock.POWERED, Boolean.FALSE), 3);
-            level.updateNeighborsAt(pos, state.getBlock());
+
+        if (be.pulseTicks == 0) {
+            BlockState currentState = be.getBlockState();
+
+            if (currentState.hasProperty(RadioAnalyserBlock.POWERED)
+                    && currentState.getValue(RadioAnalyserBlock.POWERED)) {
+                level.setBlock(pos, currentState.setValue(RadioAnalyserBlock.POWERED, false), 3);
+                level.updateNeighborsAt(pos, currentState.getBlock());
+            } else {
+                level.sendBlockUpdated(pos, currentState, currentState, 3);
+            }
+
             be.setChanged();
         }
     }
-
-    public void onRadioMessageReceived(String incomingMessage) {
-        String expected = RadioTextHelper.normalizeForComparison(targetMessage);
-        String received = RadioTextHelper.normalizeForComparison(incomingMessage);
-
-        if (expected.isEmpty()) {
-            return;
-        }
-
-        if (expected.equals(received)) {
-            pulseTicks = 20;
-            setChanged();
-
-            if (level != null) {
-                level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-            }
-        }
-    }
-
 
     @Override
     public void onLoad() {
         super.onLoad();
 
-        assert this.level != null;
-        if (!this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
+        if (this.level != null && !this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
+            BlockState state = getBlockState();
+
+            if (state.hasProperty(RadioAnalyserBlock.FREQUENCY)
+                    && state.getValue(RadioAnalyserBlock.FREQUENCY) != frequency) {
+                level.setBlock(worldPosition, state.setValue(RadioAnalyserBlock.FREQUENCY, frequency), 3);
+            }
+
             RadioWorldRegistry.addAnalyser(serverLevel, this);
         }
     }
 
     @Override
     public void setRemoved() {
-        assert this.level != null;
-        if (!this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
+        if (this.level != null && !this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
             RadioWorldRegistry.removeAnalyser(serverLevel, this);
         }
 
@@ -112,7 +128,6 @@ public class RadioAnalyserBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.frequency = RadioConstants.clampFrequency(tag.getInt(RadioConstants.NBT_FREQUENCY));
-        this.targetMessage = tag.getString(RadioConstants.NBT_TARGET_TEXT);
         this.pulseTicks = tag.getInt(RadioConstants.NBT_PULSE_TICKS);
     }
 
@@ -120,7 +135,20 @@ public class RadioAnalyserBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt(RadioConstants.NBT_FREQUENCY, frequency);
-        tag.putString(RadioConstants.NBT_TARGET_TEXT, targetMessage);
         tag.putInt(RadioConstants.NBT_PULSE_TICKS, pulseTicks);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
+        tag.putInt(RadioConstants.NBT_FREQUENCY, frequency);
+        tag.putInt(RadioConstants.NBT_PULSE_TICKS, pulseTicks);
+        return tag;
+    }
+
+    @Nullable
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

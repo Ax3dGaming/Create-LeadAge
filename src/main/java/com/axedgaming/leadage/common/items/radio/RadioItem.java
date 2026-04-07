@@ -52,7 +52,7 @@ public class RadioItem extends BlockItem implements IRadioFrequencyItem {
         }
 
         if (level.isClientSide && !isLookingAtBlock(player, 10)) {
-            RadioClientHooks.openFrequencyScreen(hand, RadioChannelHelper.getFrequency(stack));
+            RadioClientHooks.openItemFrequencyScreen(RadioChannelHelper.getFrequency(stack));
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);

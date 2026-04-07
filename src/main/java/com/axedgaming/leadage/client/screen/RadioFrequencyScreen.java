@@ -1,25 +1,35 @@
 package com.axedgaming.leadage.client.screen;
 
 import com.axedgaming.leadage.common.network.NetworkHandler;
-import com.axedgaming.leadage.common.network.SetHeldRadioFrequencyPacket;
+import com.axedgaming.leadage.common.network.SetRadioFrequencyPacket;
 import com.axedgaming.leadage.common.utils.RadioChannelHelper;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 
 public class RadioFrequencyScreen extends Screen {
 
-    private final InteractionHand hand;
+    private final boolean targetBlock;
+    private final BlockPos pos;
     private final int initialFrequency;
+
     private FrequencySlider slider;
 
-    public RadioFrequencyScreen(InteractionHand hand, int currentFrequency) {
+    public RadioFrequencyScreen(int currentFrequency) {
         super(Component.translatable("ui.leadage.radio.frequency"));
-        this.hand = hand;
+        this.targetBlock = false;
+        this.pos = BlockPos.ZERO;
+        this.initialFrequency = RadioConstants.clampFrequency(currentFrequency);
+    }
+
+    public RadioFrequencyScreen(BlockPos pos, int currentFrequency) {
+        super(Component.translatable("ui.leadage.radio.frequency"));
+        this.targetBlock = true;
+        this.pos = pos.immutable();
         this.initialFrequency = RadioConstants.clampFrequency(currentFrequency);
     }
 
@@ -32,7 +42,7 @@ public class RadioFrequencyScreen extends Screen {
         addRenderableWidget(slider);
 
         addRenderableWidget(Button.builder(Component.translatable("ui.leadage.radio.validate"), button -> {
-            NetworkHandler.sendToServer(new SetHeldRadioFrequencyPacket(hand, slider.getFrequency()));
+            NetworkHandler.sendToServer(new SetRadioFrequencyPacket(targetBlock, pos, slider.getFrequency()));
             onClose();
         }).bounds(centerX - 102, centerY + 20, 98, 20).build());
 
@@ -112,11 +122,9 @@ public class RadioFrequencyScreen extends Screen {
             if (Screen.hasAltDown()) {
                 return RadioConstants.FAST_STEP;
             }
-
             if (Screen.hasShiftDown()) {
                 return RadioConstants.FINE_STEP;
             }
-
             return RadioConstants.NORMAL_STEP;
         }
 

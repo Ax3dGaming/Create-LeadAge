@@ -34,7 +34,7 @@ public class PortableRadioItem extends Item implements IRadioFrequencyItem {
         }
 
         if (level.isClientSide) {
-            RadioClientHooks.openFrequencyScreen(hand, RadioChannelHelper.getFrequency(stack));
+            RadioClientHooks.openItemFrequencyScreen(RadioChannelHelper.getFrequency(stack));
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);

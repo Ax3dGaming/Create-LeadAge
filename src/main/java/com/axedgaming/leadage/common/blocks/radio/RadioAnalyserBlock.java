@@ -1,7 +1,10 @@
 package com.axedgaming.leadage.common.blocks.radio;
 
+import com.axedgaming.leadage.client.RadioClientHooks;
 import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
+import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
+import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -22,12 +25,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class RadioAnalyserBlock extends BaseEntityBlock {
-    public static final IntegerProperty FREQUENCY = IntegerProperty.create("frequency", 76, 108);
+    public static final IntegerProperty FREQUENCY = IntegerProperty.create("frequency", RadioConstants.MIN_FREQUENCY, RadioConstants.MAX_FREQUENCY);
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
     public RadioAnalyserBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FREQUENCY, 92).setValue(POWERED, Boolean.FALSE));
+        registerDefaultState(stateDefinition.any().setValue(FREQUENCY, RadioConstants.DEFAULT_FREQUENCY).setValue(POWERED, Boolean.FALSE));
     }
 
     @Override
@@ -64,16 +67,9 @@ public class RadioAnalyserBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof RadioAnalyserBlockEntity be && player.isShiftKeyDown()) {
-            int next = be.getFrequency() + 1;
-            if (next > 108) next = 76;
-            be.setFrequency(next);
-            level.setBlock(pos, state.setValue(FREQUENCY, next), 3);
-            player.displayClientMessage(Component.translatable("utils.leadage.analyser.set", next), true);
+        if (level.isClientSide && level.getBlockEntity(pos) instanceof RadioAnalyserBlockEntity be) {
+            RadioClientHooks.openBlockFrequencyScreen(pos, be.getFrequency());
         }
-
-        // TODO: ouvrir un menu pour modifier targetText.
-        // TODO: brancher la sélection de fréquence façon Create.
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 }

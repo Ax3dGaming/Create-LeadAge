@@ -99,7 +99,7 @@ public class ModBlocks {
             );*/
 
     public static final BlockEntry<RadioAnalyserBlock> RADIO_ANALYSER =
-            REGISTRATE.block("radio", RadioAnalyserBlock::new)
+            REGISTRATE.block("radio_analyser", RadioAnalyserBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .register();
 

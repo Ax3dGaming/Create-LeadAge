@@ -148,5 +148,10 @@ public class ModItems {
                     PortableRadioItem::new)
                     .register();
 
+    public static final ItemEntry<BlockItem> RADIO_ANALYSER =
+            LeadAge.REGISTRATE.item("radio_analyser",
+                    p -> new BlockItem(ModBlocks.RADIO_ANALYSER.get(), p.stacksTo(1)))
+                    .register();
+
     public static void register() {}
 }
