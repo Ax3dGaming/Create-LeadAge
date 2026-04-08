@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "leadage:block/radio_analyzer_bottom",
+    "up": "leadage:block/radio_analyzer_top",
+    "north": "leadage:block/radio_analyzer_front",
+    "east": "leadage:block/radio_analyzer_side",
+    "south": "leadage:block/radio_analyzer_side",
+    "west": "leadage:block/radio_analyzer_side",
+    "particle": "leadage:block/radio_analyzer_bottom"
+  }
+}

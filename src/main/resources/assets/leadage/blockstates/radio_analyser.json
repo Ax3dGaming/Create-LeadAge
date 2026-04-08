@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "leadage:block/radio_analyser"
+    },
+    "facing=east": {
+      "model": "leadage:block/radio_analyser",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "leadage:block/radio_analyser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "leadage:block/radio_analyser",
+      "y": 270
+    }
+  }
+}

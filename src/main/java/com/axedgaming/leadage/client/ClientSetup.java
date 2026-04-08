@@ -74,6 +74,10 @@ public class ClientSetup {
                     ModBlocks.LEAD_BARS.get(),
                     RenderType.cutoutMipped()
             );
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.RADIO.get(),
+                    RenderType.translucent()
+            );
         });
     }
 
