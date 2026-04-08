@@ -1,5 +1,6 @@
 package com.axedgaming.leadage.client;
 
+import com.axedgaming.leadage.client.screen.RadioAnalyserScreen;
 import com.axedgaming.leadage.client.screen.RadioFrequencyScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

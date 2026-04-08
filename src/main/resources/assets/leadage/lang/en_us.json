@@ -17,6 +17,8 @@
   "item.leadage.lead_shovel": "Lead Shovel",
   "item.leadage.lead_hoe": "Lead Hoe",
   "item.leadage.incomplete_lead_soldier_head": "Incomplete Lead Soldier Head",
+  "item.leadage.ticket": "Ticket",
+  "item.leadage.portable_radio": "Portable Radio",
 
   "block.leadage.lead_glance": "Lead Glance",
   "block.leadage.lead_block": "Block Of Lead",
@@ -30,6 +32,8 @@
   "block.leadage.tiled_lead_glass": "Tiled Lead Glass",
   "block.leadage.lead_soldier_head": "Lead Soldier Head",
   "block.leadage.lead_bars": "Lead Bars",
+  "block.leadage.radio": "Radio",
+  "block.leadage.radio_analyser": "Radio Analyser",
 
   "entity.leadage.lead_soldier": "Lead Soldier",
 
@@ -52,8 +56,14 @@
   "message.leadage.saturnism.mid": "§aSaturnism: §6%1$s",
   "message.leadage.saturnism.high": "§aSaturnism: §c%1$s",
 
-  "ui.leadage.radio.validate": "Validate",
-  "ui.leadage.radio.reset": "Reset",
+  "ui.leadage.validate": "Validate",
+  "ui.leadage.reset": "Reset",
+
+  "ui.leadage.ticket.edit": "Edit the message",
+
+  "ticket.no_message": "No message",
+  "ticket.message": "Message : %s",
+
   "ui.leadage.radio.frequency": "Radio Frequency",
   "ui.leadage.radio.tuning": "Radio Tuning",
 

@@ -73,6 +73,8 @@ public class ClientSetup {
                     RenderType.cutoutMipped()
             );
         });
+
+        event.enqueueWork(com.axedgaming.leadage.client.RadioMenuClientHooks::registerScreens);
     }
 
     @SubscribeEvent

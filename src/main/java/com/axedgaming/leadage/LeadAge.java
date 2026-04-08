@@ -43,6 +43,7 @@ public class LeadAge {
         ModRecipes.TYPES.register(modBus);
         ModEntities.ENTITIES.register(modBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modBus);
+        ModMenus.MENUS.register(modBus);
 
         ModGameRules.register();
         ModBlocks.register();

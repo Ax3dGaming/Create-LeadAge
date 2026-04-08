@@ -53,6 +53,14 @@ public final class NetworkHandler {
                 SetHeldRadioFrequencyPacket::decode,
                 SetHeldRadioFrequencyPacket::handle
         );
+
+        CHANNEL.registerMessage(
+                index++,
+                SetTicketMessagePacket.class,
+                SetTicketMessagePacket::encode,
+                SetTicketMessagePacket::decode,
+                SetTicketMessagePacket::handle
+        );
     }
 
     public static void sendToTracking(Player player, Object msg) {

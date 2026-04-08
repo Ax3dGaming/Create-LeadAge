@@ -7,6 +7,7 @@ import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class RadioAnalyserBlock extends BaseEntityBlock {
@@ -67,9 +69,13 @@ public class RadioAnalyserBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide && level.getBlockEntity(pos) instanceof RadioAnalyserBlockEntity be) {
-            RadioClientHooks.openBlockFrequencyScreen(pos, be.getFrequency());
+        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof RadioAnalyserBlockEntity analyserBe) {
+                NetworkHooks.openScreen(serverPlayer, analyserBe, pos);
+            }
         }
+
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 }

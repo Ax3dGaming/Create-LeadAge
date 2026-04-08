@@ -34,6 +34,8 @@ public class ModCreativeTab {
                                 output.accept(ModItems.LEAD_SOLDIER_SPAWN_EGG);
                                 output.accept(ModItems.RADIO);
                                 output.accept(ModItems.PORTABLE_RADIO);
+                                output.accept(ModItems.RADIO_ANALYSER);
+                                output.accept(ModItems.TICKET);
 
                                 /* Tools & Armor */
                                 output.accept(ModItems.LEAD_PICKAXE);

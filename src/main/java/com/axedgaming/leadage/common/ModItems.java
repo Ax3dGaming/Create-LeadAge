@@ -153,5 +153,10 @@ public class ModItems {
                     p -> new BlockItem(ModBlocks.RADIO_ANALYSER.get(), p.stacksTo(1)))
                     .register();
 
+    public static final ItemEntry<TicketItem> TICKET =
+            LeadAge.REGISTRATE.item("ticket",
+                    TicketItem::new)
+                    .register();
+
     public static void register() {}
 }
