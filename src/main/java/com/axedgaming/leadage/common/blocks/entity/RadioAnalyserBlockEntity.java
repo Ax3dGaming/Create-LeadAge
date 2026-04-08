@@ -1,20 +1,18 @@
 package com.axedgaming.leadage.common.blocks.entity;
 
 import com.axedgaming.leadage.common.ModBlockEntities;
-import com.axedgaming.leadage.common.ModMenus;
 import com.axedgaming.leadage.common.blocks.radio.RadioAnalyserBlock;
 import com.axedgaming.leadage.common.handlers.radio.RadioWorldRegistry;
 import com.axedgaming.leadage.common.items.TicketItem;
 import com.axedgaming.leadage.common.utils.RadioConstants;
+import com.axedgaming.leadage.common.utils.RadioTextHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,12 +21,8 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
-import com.axedgaming.leadage.common.items.TicketItem;
-import com.axedgaming.leadage.common.utils.RadioTextHelper;
-import net.minecraft.world.item.ItemStack;
 
-
-public class RadioAnalyserBlockEntity extends BlockEntity implements net.minecraft.world.MenuProvider {
+public class RadioAnalyserBlockEntity extends BlockEntity {
     private int frequency = RadioConstants.DEFAULT_FREQUENCY;
     private int pulseTicks = 0;
 
@@ -44,7 +38,7 @@ public class RadioAnalyserBlockEntity extends BlockEntity implements net.minecra
         }
 
         @Override
-        public boolean isItemValid(int slot, net.minecraft.world.item.ItemStack stack) {
+        public boolean isItemValid(int slot, ItemStack stack) {
             return stack.getItem() instanceof TicketItem;
         }
 
@@ -62,6 +56,60 @@ public class RadioAnalyserBlockEntity extends BlockEntity implements net.minecra
 
     public ItemStackHandler getInventory() {
         return inventory;
+    }
+
+    public ItemStack getStoredTicket() {
+        return inventory.getStackInSlot(0);
+    }
+
+    public boolean hasTicket() {
+        return !inventory.getStackInSlot(0).isEmpty();
+    }
+
+    public ItemStack tryInsertTicket(ItemStack stack, @Nullable Player player) {
+        if (stack.isEmpty() || !(stack.getItem() instanceof TicketItem)) {
+            return stack;
+        }
+
+        ItemStack current = inventory.getStackInSlot(0);
+        if (!current.isEmpty()) {
+            return stack;
+        }
+
+        ItemStack toInsert = stack.copy();
+        toInsert.setCount(1);
+        inventory.setStackInSlot(0, toInsert);
+
+        if (level != null && !level.isClientSide) {
+            setChanged();
+            BlockState state = getBlockState();
+            level.sendBlockUpdated(worldPosition, state, state, 3);
+        }
+
+        if (player != null && player.getAbilities().instabuild) {
+            return stack;
+        }
+
+        ItemStack remainder = stack.copy();
+        remainder.shrink(1);
+        return remainder;
+    }
+
+    public ItemStack removeTicket() {
+        ItemStack current = inventory.getStackInSlot(0);
+        if (current.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+
+        if (level != null && !level.isClientSide) {
+            setChanged();
+            BlockState state = getBlockState();
+            level.sendBlockUpdated(worldPosition, state, state, 3);
+        }
+
+        return current;
     }
 
     public int getFrequency() {
@@ -212,17 +260,6 @@ public class RadioAnalyserBlockEntity extends BlockEntity implements net.minecra
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return Component.translatable("block.leadage.radio_analyser");
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return new com.axedgaming.leadage.common.menu.RadioAnalyserMenu(containerId, playerInventory, this);
     }
 
     public String getTicketMessage() {

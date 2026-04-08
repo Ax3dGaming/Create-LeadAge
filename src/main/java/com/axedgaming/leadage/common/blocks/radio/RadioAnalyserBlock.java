@@ -3,14 +3,13 @@ package com.axedgaming.leadage.common.blocks.radio;
 import com.axedgaming.leadage.client.RadioClientHooks;
 import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.blocks.entity.RadioAnalyserBlockEntity;
-import com.axedgaming.leadage.common.blocks.entity.RadioBlockEntity;
+import com.axedgaming.leadage.common.items.TicketItem;
 import com.axedgaming.leadage.common.utils.RadioConstants;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -23,16 +22,18 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class RadioAnalyserBlock extends BaseEntityBlock {
-    public static final IntegerProperty FREQUENCY = IntegerProperty.create("frequency", RadioConstants.MIN_FREQUENCY, RadioConstants.MAX_FREQUENCY);
+    public static final IntegerProperty FREQUENCY =
+            IntegerProperty.create("frequency", RadioConstants.MIN_FREQUENCY, RadioConstants.MAX_FREQUENCY);
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
     public RadioAnalyserBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FREQUENCY, RadioConstants.DEFAULT_FREQUENCY).setValue(POWERED, Boolean.FALSE));
+        registerDefaultState(stateDefinition.any()
+                .setValue(FREQUENCY, RadioConstants.DEFAULT_FREQUENCY)
+                .setValue(POWERED, Boolean.FALSE));
     }
 
     @Override
@@ -68,14 +69,98 @@ public class RadioAnalyserBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+    public void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (oldState.getBlock() != newState.getBlock()) {
             BlockEntity be = level.getBlockEntity(pos);
+
             if (be instanceof RadioAnalyserBlockEntity analyserBe) {
-                NetworkHooks.openScreen(serverPlayer, analyserBe, pos);
+                ItemStack ticket = analyserBe.removeTicket();
+
+                if (!ticket.isEmpty()) {
+                    net.minecraft.world.Containers.dropItemStack(
+                            level,
+                            pos.getX(),
+                            pos.getY(),
+                            pos.getZ(),
+                            ticket
+                    );
+                }
             }
+
+            super.onRemove(oldState, level, pos, newState, isMoving);
+            return;
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        super.onRemove(oldState, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof RadioAnalyserBlockEntity analyserBe)) {
+            return InteractionResult.PASS;
+        }
+
+        ItemStack heldItem = player.getItemInHand(hand);
+        boolean clickedSlotZone = isClickOnTicketZone(pos, hit);
+
+        // ---------- IF CLIENT ----------
+        if (level.isClientSide) {
+            // If clicked in ticket zone, slot interaction going
+            if (clickedSlotZone) {
+                if (heldItem.isEmpty() || heldItem.getItem() instanceof TicketItem) {
+                    return InteractionResult.SUCCESS;
+                }
+            } else {
+                // Else => open frequency screen
+                if (heldItem.isEmpty()) {
+                    RadioClientHooks.openBlockFrequencyScreen(pos, analyserBe.getFrequency());
+                    return InteractionResult.SUCCESS;
+                }
+            }
+
+            return InteractionResult.PASS;
+        }
+
+        // ---------- IF SERVER ----------
+        if (clickedSlotZone) {
+            // Ticket insert
+            if (heldItem.getItem() instanceof TicketItem) {
+                ItemStack remainder = analyserBe.tryInsertTicket(heldItem, player);
+                if (remainder.getCount() != heldItem.getCount()) {
+                    player.setItemInHand(hand, remainder);
+                    return InteractionResult.CONSUME;
+                }
+                return InteractionResult.PASS;
+            }
+
+            // Ticket remove if empty hand
+            if (heldItem.isEmpty()) {
+                ItemStack extracted = analyserBe.removeTicket();
+                if (!extracted.isEmpty()) {
+                    player.setItemInHand(hand, extracted);
+                    return InteractionResult.CONSUME;
+                }
+            }
+
+            return InteractionResult.PASS;
+        }
+
+        // Not in ticket zone => nothing going server side
+        return InteractionResult.CONSUME;
+    }
+
+    /**
+     * Slot zone on the block
+     * Coords between 0 and 1 inside the block
+     */
+    private static boolean isClickOnTicketZone(BlockPos pos, BlockHitResult hit) {
+        double localX = hit.getLocation().x - pos.getX();
+        double localY = hit.getLocation().y - pos.getY();
+        double localZ = hit.getLocation().z - pos.getZ();
+
+        return localX >= 0.25D && localX <= 0.75D
+                && localY >= 0.70D && localY <= 1.00D
+                && localZ >= 0.25D && localZ <= 0.75D;
     }
 }

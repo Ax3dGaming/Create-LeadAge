@@ -2,7 +2,9 @@ package com.axedgaming.leadage.client;
 
 import com.axedgaming.leadage.LeadAge;
 import com.axedgaming.leadage.client.render.LeadSoldierRenderer;
+import com.axedgaming.leadage.client.render.blockentity.RadioAnalyserRenderer;
 import com.axedgaming.leadage.client.render.layer.MaskingLayer;
+import com.axedgaming.leadage.common.ModBlockEntities;
 import com.axedgaming.leadage.common.ModBlocks;
 import com.axedgaming.leadage.common.ModEntities;
 import com.axedgaming.leadage.common.ModSpriteShifts;
@@ -73,12 +75,12 @@ public class ClientSetup {
                     RenderType.cutoutMipped()
             );
         });
-
-        event.enqueueWork(com.axedgaming.leadage.client.RadioMenuClientHooks::registerScreens);
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.LEAD_SOLDIER.get(), LeadSoldierRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.RADIO_ANALYSER_BE.get(),
+                RadioAnalyserRenderer::new);
     }
 }

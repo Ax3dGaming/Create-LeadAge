@@ -41,12 +41,12 @@ public class RadioFrequencyScreen extends Screen {
         slider = new FrequencySlider(centerX - 100, centerY - 10, 200, 20, initialFrequency);
         addRenderableWidget(slider);
 
-        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.radio.validate"), button -> {
+        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.validate"), button -> {
             NetworkHandler.sendToServer(new SetRadioFrequencyPacket(targetBlock, pos, slider.getFrequency()));
             onClose();
         }).bounds(centerX - 102, centerY + 20, 98, 20).build());
 
-        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.radio.reset"), button -> {
+        addRenderableWidget(Button.builder(Component.translatable("ui.leadage.reset"), button -> {
             slider.setFrequency(RadioConstants.DEFAULT_FREQUENCY);
         }).bounds(centerX + 4, centerY + 20, 98, 20).build());
     }
