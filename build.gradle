@@ -181,7 +181,7 @@ tasks.withType(JavaExec).configureEach {
 
 sonar {
     properties {
-        property "sonar.projectKey", "ax3dgaming_endersdelight"
+        property "sonar.projectKey", "Ax3dGaming_Create-LeadAge"
         property "sonar.organization", "ax3dgaming"
         property "sonar.host.url", "https://sonarcloud.io"
     }

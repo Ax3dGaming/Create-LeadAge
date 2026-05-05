@@ -31,6 +31,9 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
+      - name: Setup ForgeGradle
+        run: ./gradlew --refresh-dependencies --no-daemon
+
       - name: Build mod
         run: ./gradlew build --no-daemon
 
