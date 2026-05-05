@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.sonarqube' version '7.3.0.8198'
 }
 
 version = mod_version
@@ -176,5 +177,13 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(JavaExec).configureEach {
     modularity.inferModulePath = false
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "ax3dgaming_endersdelight"
+        property "sonar.organization", "ax3dgaming"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
